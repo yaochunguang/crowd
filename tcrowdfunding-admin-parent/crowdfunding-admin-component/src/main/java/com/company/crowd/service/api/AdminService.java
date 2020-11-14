@@ -1,6 +1,9 @@
 package com.company.crowd.service.api;
 
 import com.company.entity.Admin;
+import com.company.entity.AdminExample;
+
+import java.util.List;
 
 /**
  * @description:
@@ -14,4 +17,10 @@ public interface AdminService {
      * @param admin
      */
     void saveAdmin(Admin admin);
+
+    /**
+     * 获取所有用户
+     * @return
+     */
+    List<Admin> getAdminList();
 }
