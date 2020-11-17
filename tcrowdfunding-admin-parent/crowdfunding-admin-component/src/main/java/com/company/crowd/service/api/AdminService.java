@@ -23,4 +23,10 @@ public interface AdminService {
      * @return
      */
     List<Admin> getAdminList();
+
+    /**
+     * 通过id获取用户信息
+     * @return
+     */
+    Admin getAdminById();
 }

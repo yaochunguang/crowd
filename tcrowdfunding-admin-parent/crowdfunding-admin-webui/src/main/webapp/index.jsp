@@ -9,9 +9,9 @@
 <base href="http://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/"/>
 <script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
-	
+
 	$(function(){
-		
+
 		$("#btn4").click(function(){
 			
 			// 准备要发送的数据
@@ -107,7 +107,6 @@
 		});
 		
 		$("#btn1").click(function(){
-			
 			$.ajax({
 				"url": "send/array/one.html",			// 请求目标资源的地址
 				"type": "post",						// 请求方式
@@ -122,7 +121,7 @@
 					alert(response);
 				}
 			});
-			
+
 		});
 	});
 	

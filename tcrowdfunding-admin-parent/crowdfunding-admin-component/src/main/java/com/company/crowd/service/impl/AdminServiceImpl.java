@@ -26,6 +26,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Admin getAdminById() {
+        return adminMapper.selectByPrimaryKey(1);
+    }
+
+    @Override
     public void saveAdmin(Admin admin) {
         adminMapper.insert(admin);
     }

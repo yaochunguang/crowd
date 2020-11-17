@@ -5,7 +5,9 @@ import com.company.entity.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -25,5 +27,11 @@ public class TestHandler {
         List<Admin> adminList = adminService.getAdminList();
         modelMap.addAttribute("adminList", adminList);
         return "target";
+    }
+
+    @ResponseBody
+    @RequestMapping("/send/array/three.html")
+    public Admin getAdminAjax(@RequestBody Integer[] adminIds) {
+        return  adminService.getAdminById();
     }
 }
