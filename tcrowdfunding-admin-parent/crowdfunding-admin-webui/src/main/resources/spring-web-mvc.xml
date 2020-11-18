@@ -30,5 +30,6 @@
 			</props>
 		</property>
 	</bean>
-	
+
+	<mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
 </beans>

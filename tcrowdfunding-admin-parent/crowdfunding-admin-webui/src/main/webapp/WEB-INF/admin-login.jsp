@@ -14,18 +14,11 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/login.css">
-<script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$("button").click(function(){
-			// 相当于浏览器的后退按钮
-			window.history.back();
-		});
-	});
-</script>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
 <style>
 </style>
+<title>尚筹网</title>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -39,17 +32,24 @@
 	</nav>
 
 	<div class="container">
-	
-		<h2 class="form-signin-heading" style="text-align: center;">
-			<i class="glyphicon glyphicon-log-in"></i> 尚筹网系统消息
-		</h2>
-		<!-- 
-			requestScope对应的是存放request域数据的Map
-			requestScope.exception相当于request.getAttribute("exception")
-			requestScope.exception.message相当于exception.getMessage()
-		 -->
-		<h3 style="text-align: center;">${requestScope.exception.message }</h3>
-		<button style="width: 150px;margin: 50px auto 0px auto;" class="btn btn-lg btn-success btn-block">点我返回上一步</button>
+
+		<form action="admin/do/login.html" method="post" class="form-signin" role="form">
+			<h2 class="form-signin-heading">
+				<i class="glyphicon glyphicon-log-in"></i> 管理员登录
+			</h2>
+			<p>${requestScope.exception.message }</p>
+			<div class="form-group has-success has-feedback">
+				<input type="text" name="loginAcct" class="form-control" id="inputSuccess4"
+					placeholder="请输入登录账号" autofocus> <span
+					class="glyphicon glyphicon-user form-control-feedback"></span>
+			</div>
+			<div class="form-group has-success has-feedback">
+				<input type="text" name="userPswd" class="form-control" id="inputSuccess4"
+					placeholder="请输入登录密码" style="margin-top: 10px;"> <span
+					class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+			<button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
+		</form>
 	</div>
 </body>
 </html>
