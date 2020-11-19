@@ -1,6 +1,7 @@
 package com.company.crowd.mvc.config;
 
 import com.company.crowd.constant.CrowdConstant;
+import com.company.crowd.exception.LoginFailedException;
 import com.company.crowd.util.CrowdUtil;
 import com.company.crowd.util.ResultEntity;
 import com.google.gson.Gson;
@@ -69,5 +70,19 @@ public class CrowdExceptionResolver {
         modelAndView.setViewName(viewName);
         // 11.返回modelAndView对象
         return modelAndView;
+    }
+
+    /**
+     * 登录异常处理
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = LoginFailedException.class)
+    public ModelAndView resolveLoginFailedException(LoginFailedException exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String viewName = "admin-login";
+        return commonResolve(viewName, exception, request, response);
     }
 }

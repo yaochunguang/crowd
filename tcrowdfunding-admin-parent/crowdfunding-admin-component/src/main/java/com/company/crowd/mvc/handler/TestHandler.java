@@ -26,7 +26,6 @@ public class TestHandler {
     public String testSsm(ModelMap modelMap) {
         List<Admin> adminList = adminService.getAdminList();
         modelMap.addAttribute("adminList", adminList);
-        int i = 10 / 0;
         return "target";
     }
 

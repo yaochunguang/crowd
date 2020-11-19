@@ -2,6 +2,7 @@ package com.company.crowd.test;
 
 import com.company.crowd.mapper.AdminMapper;
 import com.company.crowd.service.api.AdminService;
+import com.company.crowd.util.CrowdUtil;
 import com.company.entity.Admin;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,5 +50,10 @@ public class CrowdTest {
     public void testDataSource() throws SQLException {
         Connection connection = dataSource.getConnection();
         System.out.println(connection);
+    }
+
+    @Test
+    public void testMd5() {
+        System.out.println(CrowdUtil.md5("6666"));
     }
 }

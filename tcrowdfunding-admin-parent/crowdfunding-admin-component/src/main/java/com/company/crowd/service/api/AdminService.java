@@ -29,4 +29,12 @@ public interface AdminService {
      * @return
      */
     Admin getAdminById();
+
+    /**
+     * 管理员登录
+     * @param loginAcct 登录账号
+     * @param userPswd 登录密码
+     * @return
+     */
+    Admin adminLogin(String loginAcct, String userPswd);
 }
