@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tcrowdfunding-admin-parent</artifactId>
+    <artifactId>crowdfunding-admin-parent</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>crowdfunding-admin-webui</module>
