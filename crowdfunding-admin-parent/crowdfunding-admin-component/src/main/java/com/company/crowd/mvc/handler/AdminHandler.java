@@ -3,8 +3,10 @@ package com.company.crowd.mvc.handler;
 import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.service.api.AdminService;
 import com.company.entity.Admin;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,6 +22,16 @@ public class AdminHandler {
 
     @Autowired
     private AdminService adminService;
+
+    @RequestMapping("/admin/get/page.html")
+    public String getAdminPage(@RequestParam(value = "keyword", defaultValue = "") String keyword,
+                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                               @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                               ModelMap modelMap) {
+        PageInfo<Admin> pageInfo = adminService.selectAdminListByKeyword(keyword, pageNum, pageSize);
+        modelMap.addAttribute(CrowdConstant.ATTR_NAME_PAGE_INFO, pageInfo);
+        return "admin-page";
+    }
 
     /**
      * 管理员登录

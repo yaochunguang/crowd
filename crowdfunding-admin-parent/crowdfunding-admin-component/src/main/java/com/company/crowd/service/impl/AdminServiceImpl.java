@@ -7,6 +7,8 @@ import com.company.crowd.service.api.AdminService;
 import com.company.crowd.util.CrowdUtil;
 import com.company.entity.Admin;
 import com.company.entity.AdminExample;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,5 +64,14 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void saveAdmin(Admin admin) {
         adminMapper.insert(admin);
+    }
+
+    @Override
+    public PageInfo<Admin> selectAdminListByKeyword(String keyword, Integer pageNum, Integer pageSize) {
+        // 开启分页
+        PageHelper.startPage(pageNum, pageSize);
+        List<Admin> adminList = adminMapper.selectAdminListByKeyword(keyword);
+        PageInfo<Admin> pageInfo = new PageInfo<>(adminList);
+        return pageInfo;
     }
 }

@@ -2,6 +2,7 @@ package com.company.crowd.service.api;
 
 import com.company.entity.Admin;
 import com.company.entity.AdminExample;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -37,4 +38,11 @@ public interface AdminService {
      * @return
      */
     Admin adminLogin(String loginAcct, String userPswd);
+
+    /**
+     * 分页查询
+     * @param keyword
+     * @return
+     */
+    PageInfo<Admin> selectAdminListByKeyword(String keyword, Integer pageNum, Integer pageSize);
 }
