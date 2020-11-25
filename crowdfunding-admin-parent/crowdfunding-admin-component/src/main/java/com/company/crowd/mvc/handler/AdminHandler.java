@@ -5,6 +5,7 @@ import com.company.crowd.service.api.AdminService;
 import com.company.entity.Admin;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +28,10 @@ public class AdminHandler {
     public String getAdminPage(@RequestParam(value = "keyword", defaultValue = "") String keyword,
                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                               ModelMap modelMap) {
+                               ModelMap modelMap, HttpSession session) {
         PageInfo<Admin> pageInfo = adminService.selectAdminListByKeyword(keyword, pageNum, pageSize);
         modelMap.addAttribute(CrowdConstant.ATTR_NAME_PAGE_INFO, pageInfo);
+        session.setAttribute("keyword", keyword);
         return "admin-page";
     }
 
