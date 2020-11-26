@@ -32,6 +32,6 @@ public class TestHandler {
     @ResponseBody
     @RequestMapping("/send/array/three.html")
     public Admin getAdminAjax(@RequestBody Integer[] adminIds) {
-        return  adminService.getAdminById();
+        return  adminService.getAdminById(1);
     }
 }

@@ -14,6 +14,25 @@ import java.util.List;
 public interface AdminService {
 
     /**
+     * 删除管理员信息
+     * @param adminId
+     */
+    void removeAdmin(Integer adminId);
+
+    /**
+     * 更新管理员信息
+     * @param admin
+     */
+    void updateAdmin(Admin admin);
+
+    /**
+     * 通过id获取管理员
+     * @param adminId
+     * @return
+     */
+    Admin getAdminById(Integer adminId);
+
+    /**
      * 保存用户
      * @param admin
      */
@@ -24,12 +43,6 @@ public interface AdminService {
      * @return
      */
     List<Admin> getAdminList();
-
-    /**
-     * 通过id获取用户信息
-     * @return
-     */
-    Admin getAdminById();
 
     /**
      * 管理员登录

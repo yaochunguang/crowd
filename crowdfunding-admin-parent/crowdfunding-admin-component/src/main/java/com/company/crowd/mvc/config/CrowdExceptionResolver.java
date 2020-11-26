@@ -1,6 +1,7 @@
 package com.company.crowd.mvc.config;
 
 import com.company.crowd.constant.CrowdConstant;
+import com.company.crowd.exception.LoginAcctAlreadyInUseException;
 import com.company.crowd.exception.LoginFailedException;
 import com.company.crowd.util.CrowdUtil;
 import com.company.crowd.util.ResultEntity;
@@ -83,6 +84,22 @@ public class CrowdExceptionResolver {
     @ExceptionHandler(value = LoginFailedException.class)
     public ModelAndView resolveLoginFailedException(LoginFailedException exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String viewName = "admin-login";
+        return commonResolve(viewName, exception, request, response);
+    }
+
+    /**
+     * 新增管理员异常处理
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
+    public ModelAndView resolveLoginAcctAlreadyInUseException(LoginAcctAlreadyInUseException exception, HttpServletRequest request,
+                                                              HttpServletResponse response) throws IOException {
+        // 只是指定当前异常对应的页面即可
+        String viewName = "admin-add";
         return commonResolve(viewName, exception, request, response);
     }
 }

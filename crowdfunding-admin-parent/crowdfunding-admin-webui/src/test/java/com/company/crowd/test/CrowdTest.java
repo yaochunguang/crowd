@@ -36,7 +36,8 @@ public class CrowdTest {
     @Test
     public void testSaveAdminMulti() {
         for (int i = 0; i < 352; i++) {
-            adminMapper.insert(new Admin(null, "loginAcct" + i, "userPswd" + i, "userName" + i,
+            String pwd = CrowdUtil.md5("userPswd" + i);
+            adminMapper.insert(new Admin(null, "loginAcct" + i, pwd, "userName" + i,
                     "email" + i + "@qq.com", null));
         }
     }

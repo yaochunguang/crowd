@@ -51,6 +51,16 @@
 		// 由于每一个页码按钮都是超链接，所以在这个函数最后取消超链接的默认行为
 		return false;
 	}
+
+	function removeAdmin() {
+		if (window.confirm("确定删除该管理员吗？")) {
+			var adminId = $("#adminId").val();
+			var pageNum = $("#pageNum").val();
+			var keyword = $("#keyword").val();
+			window.location.href = "admin/remove/" + adminId + "/" + pageNum + "/" + keyword + ".html";
+		}
+		return false;
+	}
 	
 </script>
 <body>
@@ -129,7 +139,10 @@
 													</button> -->
 													<!-- 新代码 -->
 													<a href="admin/to/edit/page.html?adminId=${admin.id }&pageNum=${requestScope.pageInfo.pageNum }&keyword=${param.keyword }" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></a>
-													<a href="admin/remove/${admin.id }/${requestScope.pageInfo.pageNum }/${param.keyword }.html" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a>
+													<input type="hidden" id="adminId" name="adminId1" value="${admin.id }" />
+													<input type="hidden" id="pageNum" name="pageNum1" value="${requestScope.pageInfo.pageNum }" />
+													<input type="hidden" id="keyword" name="keyword1" value="${param.keyword }" />
+													<span onclick="removeAdmin()"><a href="javascript:void(0);" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></a></span>
 												</td>
 											</tr>
 										</c:forEach>

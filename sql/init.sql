@@ -14,3 +14,5 @@ CREATE TABLE `project_crowd` (
     `create_time` CHAR(19) COMMENT '创建时间 ',
     PRIMARY KEY (`id`)
 );
+# 增加唯一约束
+ALTER TABLE `t_admin` ADD UNIQUE INDEX (`login_acct`);

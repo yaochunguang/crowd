@@ -2,12 +2,15 @@ package com.company.crowd.mvc.handler;
 
 import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.service.api.AdminService;
+import com.company.crowd.util.CrowdUtil;
+import com.company.crowd.util.StringUtils;
 import com.company.entity.Admin;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,6 +26,38 @@ public class AdminHandler {
 
     @Autowired
     private AdminService adminService;
+
+    @RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
+    public String removeAdmin(@PathVariable("adminId")Integer adminId, @PathVariable("pageNum")Integer pageNum,
+                              @PathVariable("keyword")String keyword){
+        adminService.removeAdmin(adminId);
+        return "redirect:/admin/get/page.html?pageNum=" + pageNum + "&keyword=" + keyword;
+    }
+
+    @RequestMapping("/admin/update.html")
+    public String updateAdmin(Admin admin, @RequestParam("oldPassword")String oldPassword,
+                              @RequestParam("pageNum") Integer pageNum, @RequestParam("keyword") String keyword) {
+        if (StringUtils.isNotEmpty(oldPassword) && !oldPassword.equals(admin.getUserPswd())) {
+            admin.setUserPswd(CrowdUtil.md5(admin.getUserPswd()));
+        }
+        adminService.updateAdmin(admin);
+        return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
+    }
+
+    @RequestMapping("/admin/to/edit/page.html")
+    public String editAdmin(@RequestParam("adminId")Integer adminId, ModelMap modelMap) {
+        Admin admin = adminService.getAdminById(adminId);
+        modelMap.addAttribute("admin", admin);
+        return "admin-edit";
+    }
+
+    @RequestMapping("/admin/save.html")
+    public String addAdmin(Admin admin, ModelMap modelMap) {
+        modelMap.addAttribute("admin", admin);
+        adminService.saveAdmin(admin);
+        // 重定向到分页页面，使用重定向是为了避免刷新浏览器重复提交表单
+        return "redirect:/admin/get/page.html?pageNum=" + Integer.MAX_VALUE;
+    }
 
     @RequestMapping("/admin/get/page.html")
     public String getAdminPage(@RequestParam(value = "keyword", defaultValue = "") String keyword,

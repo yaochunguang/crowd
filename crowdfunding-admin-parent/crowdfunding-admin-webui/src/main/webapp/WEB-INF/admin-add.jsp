@@ -28,24 +28,24 @@
 						<form action="admin/save.html" method="post" role="form">
 							<p>${requestScope.exception.message }</p>
 							<div class="form-group">
-								<label for="exampleInputPassword1">登录账号</label>
+								<label for="loginAcct">登录账号</label>
 								<input
 									name="loginAcct"
-									type="text" class="form-control" id="exampleInputPassword1"
+									type="text" class="form-control" id="loginAcct"
 									placeholder="请输入登录账号">
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword1">登录密码</label>
+								<label for="userPswd">登录密码</label>
 								<input
 									name="userPswd"
-									type="text" class="form-control" id="exampleInputPassword1"
+									type="password" class="form-control" id="userPswd"
 									placeholder="请输入登录密码">
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword1">用户昵称</label>
+								<label for="userName">用户昵称</label>
 								<input
 									name="userName"
-									type="text" class="form-control" id="exampleInputPassword1"
+									type="text" class="form-control" id="userName"
 									placeholder="请输入用户名称">
 							</div>
 							<div class="form-group">
