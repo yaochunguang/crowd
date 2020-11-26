@@ -27,6 +27,13 @@ public class AdminHandler {
     @Autowired
     private AdminService adminService;
 
+    /**
+     * 这种写法主要是为了演练restful风格，使用PathVariable来接受参数
+     * @param adminId
+     * @param pageNum
+     * @param keyword
+     * @return
+     */
     @RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
     public String removeAdmin(@PathVariable("adminId")Integer adminId, @PathVariable("pageNum")Integer pageNum,
                               @PathVariable("keyword")String keyword){
