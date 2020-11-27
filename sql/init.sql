@@ -5,7 +5,7 @@ CREATE DATABASE project_crowd;
 USE project_crowd;
 
 # 管理员表
-CREATE TABLE `project_crowd` (
+CREATE TABLE `t_admin` (
     `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
     `login_acct` VARCHAR (255) NOT NULL COMMENT '登录账号',
     `user_pswd` CHAR(32) NOT NULL COMMENT '登录密码',
@@ -16,3 +16,9 @@ CREATE TABLE `project_crowd` (
 );
 # 增加唯一约束
 ALTER TABLE `t_admin` ADD UNIQUE INDEX (`login_acct`);
+
+# 角色表
+CREATE TABLE `t_role` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '主键' ,
+    `name` CHAR(100) NOT NULL COMMENT '角色名称'
+);
