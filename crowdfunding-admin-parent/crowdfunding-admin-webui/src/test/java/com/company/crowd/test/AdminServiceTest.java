@@ -16,7 +16,7 @@ import javax.sound.midi.Soundbank;
  * @description: 管理员测试类
  **/
 @RunWith(SpringJUnit4ClassRunner.class)
-// 注意：配置clsaapath的时候不能有空格
+// 注意：配置classpath的时候不能有空格
 @ContextConfiguration(locations = {"classpath:spring-persist-mybatis.xml", "classpath:spring-persist-tx.xml"})
 public class AdminServiceTest {
 

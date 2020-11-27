@@ -3,6 +3,7 @@ package com.company.crowd.mvc.config;
 import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.exception.LoginAcctAlreadyInUseException;
 import com.company.crowd.exception.LoginFailedException;
+import com.company.crowd.exception.RoleExistException;
 import com.company.crowd.util.CrowdUtil;
 import com.company.crowd.util.ResultEntity;
 import com.google.gson.Gson;
@@ -100,6 +101,22 @@ public class CrowdExceptionResolver {
                                                               HttpServletResponse response) throws IOException {
         // 只是指定当前异常对应的页面即可
         String viewName = "admin-add";
+        return commonResolve(viewName, exception, request, response);
+    }
+
+    /**
+     * 新增橘色异常处理
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = RoleExistException.class)
+    public ModelAndView resolveRoleExistException(RoleExistException exception, HttpServletRequest request,
+                                                  HttpServletResponse response) throws IOException {
+        // 只是指定当前异常对应的页面即可
+        String viewName = "role-add";
         return commonResolve(viewName, exception, request, response);
     }
 }

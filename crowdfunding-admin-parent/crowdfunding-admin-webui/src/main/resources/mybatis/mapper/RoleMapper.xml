@@ -80,6 +80,14 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="getRoleListByKeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from t_role
+    where name like CONCAT("%",#{keyword},"%")
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -125,6 +133,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map" >
     update t_role
     <set >

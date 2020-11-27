@@ -6,6 +6,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
+
+    /**
+     * 通过关键字查询角色列表
+     * @param keyword
+     * @return
+     */
+    List<Role> getRoleListByKeyword(String keyword);
+
     int countByExample(RoleExample example);
 
     int deleteByExample(RoleExample example);

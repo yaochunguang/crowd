@@ -20,7 +20,7 @@ import java.sql.SQLException;
  * @date: 2020-10-15 0:41
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-// 注意：配置clsaapath的时候不能有空格
+// 注意：配置classpath的时候不能有空格
 @ContextConfiguration(locations = {"classpath:spring-persist-mybatis.xml", "classpath:spring-persist-tx.xml"})
 public class CrowdTest {
 
