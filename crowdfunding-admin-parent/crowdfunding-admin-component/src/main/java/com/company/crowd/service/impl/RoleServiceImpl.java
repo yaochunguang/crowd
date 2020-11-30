@@ -71,4 +71,12 @@ public class RoleServiceImpl implements RoleService {
     public void deleteRoleById(Integer roleId) {
         roleMapper.deleteByPrimaryKey(roleId);
     }
+
+    @Override
+    public void batchDeleteRole(List<Integer> roleIdList) {
+        RoleExample roleExample = new RoleExample();
+        RoleExample.Criteria criteria = roleExample.createCriteria();
+        criteria.andIdIn(roleIdList);
+        roleMapper.deleteByExample(roleExample);
+    }
 }

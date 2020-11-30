@@ -41,8 +41,14 @@ public interface RoleService {
     void updateRole(Role role);
 
     /**
-     * 通过角色id查询角色
+     * 通过角色id删除角色
      * @param roleId
      */
     void deleteRoleById(Integer roleId);
+
+    /**
+     * 根据id批量删除角色
+     * @param roleIdList
+     */
+    void batchDeleteRole(List<Integer> roleIdList);
 }

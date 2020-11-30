@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author: yaochunguang
@@ -48,5 +50,37 @@ public class RoleHandler {
         PageInfo<Role> pageInfo = roleService.getRoleListByKeyword(pageNum, pageSize, keyword);
         // 封装到ResultEntity对象中返回（如果上面的操作抛出异常，交给异常映射机制处理）
         return ResultEntity.successWithData(pageInfo);
+    }
+
+    /**
+     * 新增角色
+     * @param role
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/role/save.json")
+    public ResultEntity<String> addRole(Role role) {
+        roleService.addRole(role);
+        return ResultEntity.successWithoutData();
+    }
+
+
+    /**
+     * 更新角色信息
+     * @param role
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/role/update.json")
+    public ResultEntity<String> updateRole(Role role) {
+        roleService.updateRole(role);
+        return ResultEntity.successWithoutData();
+    }
+
+    @ResponseBody
+    @RequestMapping("/role/remove/by/role/id/array.json")
+    public ResultEntity<String> removeRoleById(@RequestBody List<Integer> roleIdList) {
+        roleService.batchDeleteRole(roleIdList);
+        return ResultEntity.successWithoutData();
     }
 }
