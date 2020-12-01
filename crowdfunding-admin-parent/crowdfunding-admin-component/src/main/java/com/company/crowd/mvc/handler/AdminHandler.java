@@ -3,11 +3,10 @@ package com.company.crowd.mvc.handler;
 import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.service.api.AdminService;
 import com.company.crowd.util.CrowdUtil;
-import com.company.crowd.util.StringUtils;
+import com.company.crowd.util.MyStringUtils;
 import com.company.entity.Admin;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +43,7 @@ public class AdminHandler {
     @RequestMapping("/admin/update.html")
     public String updateAdmin(Admin admin, @RequestParam("oldPassword")String oldPassword,
                               @RequestParam("pageNum") Integer pageNum, @RequestParam("keyword") String keyword) {
-        if (StringUtils.isNotEmpty(oldPassword) && !oldPassword.equals(admin.getUserPswd())) {
+        if (MyStringUtils.isNotEmpty(oldPassword) && !oldPassword.equals(admin.getUserPswd())) {
             admin.setUserPswd(CrowdUtil.md5(admin.getUserPswd()));
         }
         adminService.updateAdmin(admin);

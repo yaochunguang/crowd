@@ -5,7 +5,7 @@ package com.company.crowd.util;
  * @date: 2020-11-26 15:10
  * @description: 字符串工具类
  **/
-public class StringUtils {
+public class MyStringUtils {
 
     /**
      * 判断字符串是否为空
