@@ -1,8 +1,17 @@
 package com.company.crowd.mvc.handler;
 
 import com.company.crowd.service.api.MenuService;
+import com.company.crowd.util.ResultEntity;
+import com.company.entity.Menu;
+import javafx.scene.control.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 菜单handler
@@ -14,4 +23,26 @@ public class MenuHandler {
 
     @Autowired
     private MenuService menuService;
+
+    @ResponseBody
+    @RequestMapping("/menu/get/whole/tree.json")
+    public ResultEntity<Menu> getMenuTree() {
+        List<Menu> allMenu = menuService.getAllMenu();
+        Menu root = null;
+        Map<Integer, Menu> menuMap = new HashMap<>();
+        for (Menu menu : allMenu) {
+            Integer id = menu.getId();
+            menuMap.put(id, menu);
+        }
+        for (Menu menu : allMenu) {
+            Integer pid = menu.getPid();
+            if (pid == null) {
+                root = menu;
+                continue;
+            }
+            Menu fatherMenu = menuMap.get(pid);
+            fatherMenu.getChildren().add(menu);
+        }
+        return ResultEntity.successWithData(root);
+    }
 }

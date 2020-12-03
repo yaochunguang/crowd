@@ -18,6 +18,19 @@ public class Menu {
 
     private Boolean open = true;
 
+    public Menu() {
+    }
+
+    public Menu(Integer id, Integer pid, String name, String url, String icon, List<Menu> children, Boolean open) {
+        this.id = id;
+        this.pid = pid;
+        this.name = name;
+        this.url = url;
+        this.icon = icon;
+        this.children = children;
+        this.open = open;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -56,5 +69,34 @@ public class Menu {
 
     public void setIcon(String icon) {
         this.icon = icon == null ? null : icon.trim();
+    }
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
+
+    public Boolean getOpen() {
+        return open;
+    }
+
+    public void setOpen(Boolean open) {
+        this.open = open;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", pid=" + pid +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", icon='" + icon + '\'' +
+                ", children=" + children +
+                ", open=" + open +
+                '}';
     }
 }
