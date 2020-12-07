@@ -66,6 +66,26 @@
   <sql id="Base_Column_List" >
     id, name
   </sql>
+
+  <!-- 通过管理员id查询已经分配的角色 -->
+  <select id="selectAssignRoleByAdminId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from t_role
+    where id in (
+    select role_id from inner_admin_role where role_id = #{adminId}
+    )
+  </select>
+  <!-- 通过管理员id查询还没有分配的角色 -->
+  <select id="selectUnAssignRoleByAdminId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from t_role
+    where id not in (
+    select role_id from inner_admin_role where role_id = #{adminId}
+    )
+  </select>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.company.entity.RoleExample" >
     select
     <if test="distinct" >

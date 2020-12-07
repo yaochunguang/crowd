@@ -51,4 +51,18 @@ public interface RoleService {
      * @param roleIdList
      */
     void batchDeleteRole(List<Integer> roleIdList);
+
+    /**
+     * 通过管理员id查询已经分配的角色
+     * @param adminId
+     * @return
+     */
+    List<Role> selectAssignRoleByAdminId(Integer adminId);
+
+    /**
+     * 通过管理员id查询还没有分配的角色
+     * @param adminId
+     * @return
+     */
+    List<Role> selectUnAssignRoleByAdminId(Integer adminId);
 }

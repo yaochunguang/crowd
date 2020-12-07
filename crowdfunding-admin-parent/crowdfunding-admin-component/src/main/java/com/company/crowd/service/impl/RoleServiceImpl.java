@@ -79,4 +79,14 @@ public class RoleServiceImpl implements RoleService {
         criteria.andIdIn(roleIdList);
         roleMapper.deleteByExample(roleExample);
     }
+
+    @Override
+    public List<Role> selectAssignRoleByAdminId(Integer adminId) {
+        return roleMapper.selectAssignRoleByAdminId(adminId);
+    }
+
+    @Override
+    public List<Role> selectUnAssignRoleByAdminId(Integer adminId) {
+        return roleMapper.selectUnAssignRoleByAdminId(adminId);
+    }
 }

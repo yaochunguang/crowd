@@ -35,4 +35,18 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    /**
+     * 通过管理员id查询已经分配的角色
+     * @param adminId
+     * @return
+     */
+    List<Role> selectAssignRoleByAdminId(Integer adminId);
+
+    /**
+     * 通过管理员id查询还没有分配的角色
+     * @param adminId
+     * @return
+     */
+    List<Role> selectUnAssignRoleByAdminId(Integer adminId);
 }

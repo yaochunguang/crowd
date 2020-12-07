@@ -53,3 +53,12 @@ insert into `t_menu` (`id`, `pid`, `NAME`, `url`, `icon`) values('16','11',' 消
 insert into `t_menu` (`id`, `pid`, `NAME`, `url`, `icon`) values('17','11',' 项 目 分 类 ','projectType/index.htm','glyphicon');
 insert into `t_menu` (`id`, `pid`, `NAME`, `url`, `icon`) values('18','11',' 项 目 标 签 ','tag/index.htm','glyphicon');
 insert into `t_menu` (`id`, `pid`, `NAME`, `url`, `icon`) values('19','1',' 参 数 管 理 ','param/index.htm','glyphicon');
+
+# 管理员和角色的关联关系（权限）
+# 这个表并不对应现实生活中或项目业务功能中的一个具体实体，所以没有对应 的实体类，也不通过逆向工程做逆向生成
+CREATE TABLE `inner_admin_role` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `admin_id` INT COMMENT '管理员id',
+  `role_id` INT COMMENT '角色id',
+  PRIMARY KEY (`id`)
+) ;
