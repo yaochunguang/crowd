@@ -1,6 +1,7 @@
 package com.company.crowd.util;
 
 import com.company.crowd.constant.CrowdConstant;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +46,7 @@ public class CrowdUtil {
      */
     public static String md5(String source) {
         // 1.判断 source 是否有效
-        if (source == null || source.length() == 0) {
+        if (StringUtils.isEmpty(source)) {
             // 2.如果不是有效的字符串抛出异常
             throw new RuntimeException(CrowdConstant.MESSAGE_STRING_INVALIDATE);
         }
