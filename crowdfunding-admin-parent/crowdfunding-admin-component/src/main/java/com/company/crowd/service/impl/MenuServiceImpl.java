@@ -25,4 +25,19 @@ public class MenuServiceImpl implements MenuService {
         MenuExample menuExample = new MenuExample();
         return menuMapper.selectByExample(menuExample);
     }
+
+    @Override
+    public void saveMenu(Menu menu) {
+        menuMapper.insert(menu);
+    }
+
+    @Override
+    public void updateMenu(Menu menu) {
+        menuMapper.updateByPrimaryKeySelective(menu);
+    }
+
+    @Override
+    public void deleteMenuById(Integer id) {
+        menuMapper.deleteByPrimaryKey(id);
+    }
 }

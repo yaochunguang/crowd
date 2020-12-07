@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,5 +45,40 @@ public class MenuHandler {
             fatherMenu.getChildren().add(menu);
         }
         return ResultEntity.successWithData(root);
+    }
+
+    /**
+     * 新增菜单
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/menu/save.json")
+    public ResultEntity<Menu> saveMenu(Menu menu) {
+        menuService.saveMenu(menu);
+        return ResultEntity.successWithoutData();
+    }
+
+    /**
+     * 更新菜单
+     * @param menu
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/menu/update.json")
+    public ResultEntity<Menu> updateMenu(Menu menu) {
+        menuService.updateMenu(menu);
+        return ResultEntity.successWithoutData();
+    }
+
+    /**
+     * 根据id删除菜单
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/menu/remove.json")
+    public ResultEntity<Menu> deleteMenuById(Integer id) {
+        menuService.deleteMenuById(id);
+        return ResultEntity.successWithoutData();
     }
 }
