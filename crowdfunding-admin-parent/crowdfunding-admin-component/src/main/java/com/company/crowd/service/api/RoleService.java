@@ -65,4 +65,11 @@ public interface RoleService {
      * @return
      */
     List<Role> selectUnAssignRoleByAdminId(Integer adminId);
+
+    /**
+     * 保存管理员和角色的关系
+     * @param adminId
+     * @param roleIdList
+     */
+    void saveAdminAssignRoleRelationShip(Integer adminId, List<Integer> roleIdList);
 }

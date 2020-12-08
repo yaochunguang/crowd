@@ -43,5 +43,5 @@
 		});
 	});
 </script>
-<title>尚筹网</title>
+<title>Crowd</title>
 </head>

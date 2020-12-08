@@ -49,4 +49,17 @@ public interface RoleMapper {
      * @return
      */
     List<Role> selectUnAssignRoleByAdminId(Integer adminId);
+
+    /**
+     * 通过adminId删除原有的分配关系
+     * @param adminId
+     */
+    void deleteOldRelationShipByAdminId(Integer adminId);
+
+    /**
+     * 新增分配关系
+     * @param adminId
+     * @param roleIdList
+     */
+    void insertNewRelationShip(@Param("adminId") Integer adminId, @Param("roleIdList") List<Integer> roleIdList);
 }

@@ -89,4 +89,12 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> selectUnAssignRoleByAdminId(Integer adminId) {
         return roleMapper.selectUnAssignRoleByAdminId(adminId);
     }
+
+    @Override
+    public void saveAdminAssignRoleRelationShip(Integer adminId, List<Integer> roleIdList) {
+        roleMapper.deleteOldRelationShipByAdminId(adminId);
+        if (roleIdList != null && roleIdList.size() > 0) {
+            roleMapper.insertNewRelationShip(adminId, roleIdList);
+        }
+    }
 }

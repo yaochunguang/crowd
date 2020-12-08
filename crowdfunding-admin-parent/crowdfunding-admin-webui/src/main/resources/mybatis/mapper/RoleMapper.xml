@@ -73,7 +73,7 @@
     <include refid="Base_Column_List"/>
     from t_role
     where id in (
-    select role_id from inner_admin_role where role_id = #{adminId}
+    select role_id from inner_admin_role where admin_id = #{adminId}
     )
   </select>
   <!-- 通过管理员id查询还没有分配的角色 -->
@@ -82,9 +82,22 @@
     <include refid="Base_Column_List"/>
     from t_role
     where id not in (
-    select role_id from inner_admin_role where role_id = #{adminId}
+    select role_id from inner_admin_role where admin_id = #{adminId}
     )
   </select>
+
+  <!-- 通过adminId删除原有的分配关系 -->
+  <delete id="deleteOldRelationShipByAdminId" parameterType="java.lang.Integer">
+    delete from inner_admin_role where admin_id = #{adminId}
+  </delete>
+
+  <!-- 新增分配关系 -->
+  <insert id="insertNewRelationShip">
+    insert into inner_admin_role(admin_id, role_id) values
+    <foreach collection="roleIdList" item="roleId" separator=",">
+      (#{adminId}, #{roleId})
+    </foreach>
+  </insert>
 
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.company.entity.RoleExample" >
     select

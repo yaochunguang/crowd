@@ -35,4 +35,13 @@ public class AssignHandler {
         modelMap.addAttribute("unAssignedRoleList", unAssignedRoleList);
         return "assign-role";
     }
+
+    @RequestMapping("/assign/do/role/assign.html")
+    public String saveAdminAssignRoleRelationShip(@RequestParam("adminId") Integer adminId,
+                                                  @RequestParam("pageNum") Integer pageNum,
+                                                  @RequestParam("keyword") String keyword,
+                                                  @RequestParam(value = "roleIdList", required = false) List<Integer> roleIdList) {
+        roleService.saveAdminAssignRoleRelationShip(adminId, roleIdList);
+        return "redirect:/admin/get/page.html?pageNum=" + pageNum + "&keyword=" + keyword;
+    }
 }
