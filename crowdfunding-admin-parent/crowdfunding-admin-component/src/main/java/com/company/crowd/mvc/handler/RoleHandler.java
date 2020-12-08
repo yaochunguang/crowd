@@ -60,8 +60,12 @@ public class RoleHandler {
     @ResponseBody
     @RequestMapping("/role/save.json")
     public ResultEntity<String> addRole(Role role) {
-        roleService.addRole(role);
-        return ResultEntity.successWithoutData();
+        try {
+            roleService.addRole(role);
+            return ResultEntity.successWithoutData();
+        } catch (Exception e) {
+            return ResultEntity.failed(e.getMessage());
+        }
     }
 
 
@@ -73,8 +77,12 @@ public class RoleHandler {
     @ResponseBody
     @RequestMapping("/role/update.json")
     public ResultEntity<String> updateRole(Role role) {
-        roleService.updateRole(role);
-        return ResultEntity.successWithoutData();
+        try {
+            roleService.updateRole(role);
+            return ResultEntity.successWithoutData();
+        } catch (Exception e) {
+            return ResultEntity.failed(e.getMessage());
+        }
     }
 
     @ResponseBody

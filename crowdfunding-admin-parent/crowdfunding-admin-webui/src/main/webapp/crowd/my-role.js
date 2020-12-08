@@ -1,7 +1,7 @@
-// ÉùÃ÷×¨ÃÅµÄº¯ÊıÓÃÀ´ÔÚ·ÖÅäAuthµÄÄ£Ì¬¿òÖĞÏÔÊ¾AuthµÄÊ÷ĞÎ½á¹¹Êı¾İ
+// å£°æ˜ä¸“é—¨çš„å‡½æ•°ç”¨æ¥åœ¨åˆ†é…Authçš„æ¨¡æ€æ¡†ä¸­æ˜¾ç¤ºAuthçš„æ ‘å½¢ç»“æ„æ•°æ®
 function fillAuthTree() {
 	
-	// 1.·¢ËÍAjaxÇëÇó²éÑ¯AuthÊı¾İ
+	// 1.å‘é€Ajaxè¯·æ±‚æŸ¥è¯¢Authæ•°æ®
 	var ajaxReturn = $.ajax({
 		"url":"assgin/get/all/auth.json",
 		"type":"post",
@@ -10,27 +10,27 @@ function fillAuthTree() {
 	});
 	
 	if(ajaxReturn.status != 200) {
-		layer.msg("ÇëÇó´¦Àí³ö´í£¡ÏìÓ¦×´Ì¬ÂëÊÇ£º"+ajaxReturn.status+" ËµÃ÷ÊÇ£º"+ajaxReturn.statusText);
+		layer.msg("è¯·æ±‚å¤„ç†å‡ºé”™ï¼å“åº”çŠ¶æ€ç æ˜¯ï¼š"+ajaxReturn.status+" è¯´æ˜æ˜¯ï¼š"+ajaxReturn.statusText);
 		return ;
 	}
 	
-	// 2.´ÓÏìÓ¦½á¹ûÖĞ»ñÈ¡AuthµÄJSONÊı¾İ
-	// ´Ó·şÎñÆ÷¶Ë²éÑ¯µ½µÄlist²»ĞèÒª×é×°³ÉÊ÷ĞÎ½á¹¹£¬ÕâÀïÎÒÃÇ½»¸øzTreeÈ¥×é×°
+	// 2.ä»å“åº”ç»“æœä¸­è·å–Authçš„JSONæ•°æ®
+	// ä»æœåŠ¡å™¨ç«¯æŸ¥è¯¢åˆ°çš„listä¸éœ€è¦ç»„è£…æˆæ ‘å½¢ç»“æ„ï¼Œè¿™é‡Œæˆ‘ä»¬äº¤ç»™zTreeå»ç»„è£…
 	var authList = ajaxReturn.responseJSON.data;
 	
-	// 3.×¼±¸¶ÔzTree½øĞĞÉèÖÃµÄJSON¶ÔÏó
+	// 3.å‡†å¤‡å¯¹zTreeè¿›è¡Œè®¾ç½®çš„JSONå¯¹è±¡
 	var setting = {
 		"data": {
 			"simpleData": {
 				
-				// ¿ªÆô¼òµ¥JSON¹¦ÄÜ
+				// å¼€å¯ç®€å•JSONåŠŸèƒ½
 				"enable": true,
 				
-				// Ê¹ÓÃcategoryIdÊôĞÔ¹ØÁª¸¸½Úµã£¬²»ÓÃÄ¬ÈÏµÄpIdÁË
+				// ä½¿ç”¨categoryIdå±æ€§å…³è”çˆ¶èŠ‚ç‚¹ï¼Œä¸ç”¨é»˜è®¤çš„pIdäº†
 				"pIdKey": "categoryId"
 			},
 			"key": {
-				// Ê¹ÓÃtitleÊôĞÔÏÔÊ¾½ÚµãÃû³Æ£¬²»ÓÃÄ¬ÈÏµÄname×÷ÎªÊôĞÔÃûÁË
+				// ä½¿ç”¨titleå±æ€§æ˜¾ç¤ºèŠ‚ç‚¹åç§°ï¼Œä¸ç”¨é»˜è®¤çš„nameä½œä¸ºå±æ€§åäº†
 				"name": "title"
 			}
 		},
@@ -39,17 +39,17 @@ function fillAuthTree() {
 		}
 	};
 	
-	// 4.Éú³ÉÊ÷ĞÎ½á¹¹
+	// 4.ç”Ÿæˆæ ‘å½¢ç»“æ„
 	// <ul id="authTreeDemo" class="ztree"></ul>
 	$.fn.zTree.init($("#authTreeDemo"), setting, authList);
 
-	// »ñÈ¡zTreeObj¶ÔÏó
+	// è·å–zTreeObjå¯¹è±¡
 	var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
 	
-	// µ÷ÓÃzTreeObj¶ÔÏóµÄ·½·¨£¬°Ñ½ÚµãÕ¹¿ª
+	// è°ƒç”¨zTreeObjå¯¹è±¡çš„æ–¹æ³•ï¼ŒæŠŠèŠ‚ç‚¹å±•å¼€
 	zTreeObj.expandAll(true);
 	
-	// 5.²éÑ¯ÒÑ·ÖÅäµÄAuthµÄid×é³ÉµÄÊı×é
+	// 5.æŸ¥è¯¢å·²åˆ†é…çš„Authçš„idç»„æˆçš„æ•°ç»„
 	ajaxReturn = $.ajax({
 		"url":"assign/get/assigned/auth/id/by/role/id.json",
 		"type":"post",
@@ -61,47 +61,47 @@ function fillAuthTree() {
 	});
 	
 	if(ajaxReturn.status != 200) {
-		layer.msg("ÇëÇó´¦Àí³ö´í£¡ÏìÓ¦×´Ì¬ÂëÊÇ£º"+ajaxReturn.status+" ËµÃ÷ÊÇ£º"+ajaxReturn.statusText);
+		layer.msg("è¯·æ±‚å¤„ç†å‡ºé”™ï¼å“åº”çŠ¶æ€ç æ˜¯ï¼š"+ajaxReturn.status+" è¯´æ˜æ˜¯ï¼š"+ajaxReturn.statusText);
 		return ;
 	}
 	
-	// ´ÓÏìÓ¦½á¹ûÖĞ»ñÈ¡authIdArray
+	// ä»å“åº”ç»“æœä¸­è·å–authIdArray
 	var authIdArray = ajaxReturn.responseJSON.data;
 	
-	// 6.¸ù¾İauthIdArray°ÑÊ÷ĞÎ½á¹¹ÖĞ¶ÔÓ¦µÄ½Úµã¹´Ñ¡ÉÏ
-	// ¢Ù±éÀúauthIdArray
+	// 6.æ ¹æ®authIdArrayæŠŠæ ‘å½¢ç»“æ„ä¸­å¯¹åº”çš„èŠ‚ç‚¹å‹¾é€‰ä¸Š
+	// â‘ éå†authIdArray
 	for(var i = 0; i < authIdArray.length; i++) {
 		var authId = authIdArray[i];
 		
-		// ¢Ú¸ù¾İid²éÑ¯Ê÷ĞÎ½á¹¹ÖĞ¶ÔÓ¦µÄ½Úµã
+		// â‘¡æ ¹æ®idæŸ¥è¯¢æ ‘å½¢ç»“æ„ä¸­å¯¹åº”çš„èŠ‚ç‚¹
 		var treeNode = zTreeObj.getNodeByParam("id", authId);
 		
-		// ¢Û½«treeNodeÉèÖÃÎª±»¹´Ñ¡
+		// â‘¢å°†treeNodeè®¾ç½®ä¸ºè¢«å‹¾é€‰
 		
-		// checkedÉèÖÃÎªtrue±íÊ¾½Úµã¹´Ñ¡
+		// checkedè®¾ç½®ä¸ºtrueè¡¨ç¤ºèŠ‚ç‚¹å‹¾é€‰
 		var checked = true;
 		
-		// checkTypeFlagÉèÖÃÎªfalse£¬±íÊ¾²»¡°Áª¶¯¡±£¬²»Áª¶¯ÊÇÎªÁË±ÜÃâ°Ñ²»¸Ã¹´Ñ¡µÄ¹´Ñ¡ÉÏ
+		// checkTypeFlagè®¾ç½®ä¸ºfalseï¼Œè¡¨ç¤ºä¸â€œè”åŠ¨â€ï¼Œä¸è”åŠ¨æ˜¯ä¸ºäº†é¿å…æŠŠä¸è¯¥å‹¾é€‰çš„å‹¾é€‰ä¸Š
 		var checkTypeFlag = false;
 		
-		// Ö´ĞĞ
+		// æ‰§è¡Œ
 		zTreeObj.checkNode(treeNode, checked, checkTypeFlag);
 	}
 }
 
-// ÉùÃ÷×¨ÃÅµÄº¯ÊıÏÔÊ¾È·ÈÏÄ£Ì¬¿ò
+// å£°æ˜ä¸“é—¨çš„å‡½æ•°æ˜¾ç¤ºç¡®è®¤æ¨¡æ€æ¡†
 function showConfirmModal(roleArray) {
 	
-	// ´ò¿ªÄ£Ì¬¿ò
+	// æ‰“å¼€æ¨¡æ€æ¡†
 	$("#confirmModal").modal("show");
 	
-	// Çå³ı¾ÉµÄÊı¾İ
+	// æ¸…é™¤æ—§çš„æ•°æ®
 	$("#roleNameDiv").empty();
 	
-	// ÔÚÈ«¾Ö±äÁ¿·¶Î§´´½¨Êı×éÓÃÀ´´æ·Å½ÇÉ«id
+	// åœ¨å…¨å±€å˜é‡èŒƒå›´åˆ›å»ºæ•°ç»„ç”¨æ¥å­˜æ”¾è§’è‰²id
 	window.roleIdArray = [];
 	
-	// ±éÀúroleArrayÊı×é
+	// éå†roleArrayæ•°ç»„
 	for(var i = 0; i < roleArray.length; i++) {
 		var role = roleArray[i];
 		var roleName = role.roleName;
@@ -109,27 +109,27 @@ function showConfirmModal(roleArray) {
 		
 		var roleId = role.roleId;
 		
-		// µ÷ÓÃÊı×é¶ÔÏóµÄpush()·½·¨´æÈëĞÂÔªËØ
+		// è°ƒç”¨æ•°ç»„å¯¹è±¡çš„push()æ–¹æ³•å­˜å…¥æ–°å…ƒç´ 
 		window.roleIdArray.push(roleId);
 	}
 	
 }
 
-// Ö´ĞĞ·ÖÒ³£¬Éú³ÉÒ³ÃæĞ§¹û£¬ÈÎºÎÊ±ºòµ÷ÓÃÕâ¸öº¯Êı¶¼»áÖØĞÂ¼ÓÔØÒ³Ãæ
+// æ‰§è¡Œåˆ†é¡µï¼Œç”Ÿæˆé¡µé¢æ•ˆæœï¼Œä»»ä½•æ—¶å€™è°ƒç”¨è¿™ä¸ªå‡½æ•°éƒ½ä¼šé‡æ–°åŠ è½½é¡µé¢
 function generatePage() {
 	
-	// 1.»ñÈ¡·ÖÒ³Êı¾İ
+	// 1.è·å–åˆ†é¡µæ•°æ®
 	var pageInfo = getPageInfoRemote();
 	
-	// 2.Ìî³ä±í¸ñ
+	// 2.å¡«å……è¡¨æ ¼
 	fillTableBody(pageInfo);
 	
 }
 
-// Ô¶³Ì·ÃÎÊ·şÎñÆ÷¶Ë³ÌĞò»ñÈ¡pageInfoÊı¾İ
+// è¿œç¨‹è®¿é—®æœåŠ¡å™¨ç«¯ç¨‹åºè·å–pageInfoæ•°æ®
 function getPageInfoRemote() {
 	
-	// µ÷ÓÃ$.ajax()º¯Êı·¢ËÍÇëÇó²¢½ÓÊÜ$.ajax()º¯ÊıµÄ·µ»ØÖµ
+	// è°ƒç”¨$.ajax()å‡½æ•°å‘é€è¯·æ±‚å¹¶æ¥å—$.ajax()å‡½æ•°çš„è¿”å›å€¼
 	var ajaxResult = $.ajax({
 		"url": "role/get/page/info.json",
 		"type":"post",
@@ -144,51 +144,51 @@ function getPageInfoRemote() {
 	
 	console.log(ajaxResult);
 	
-	// ÅĞ¶Ïµ±Ç°ÏìÓ¦×´Ì¬ÂëÊÇ·ñÎª200
+	// åˆ¤æ–­å½“å‰å“åº”çŠ¶æ€ç æ˜¯å¦ä¸º200
 	var statusCode = ajaxResult.status;
 	
-	// Èç¹ûµ±Ç°ÏìÓ¦×´Ì¬Âë²»ÊÇ200£¬ËµÃ÷·¢ÉúÁË´íÎó»òÆäËûÒâÍâÇé¿ö£¬ÏÔÊ¾ÌáÊ¾ÏûÏ¢£¬ÈÃµ±Ç°º¯ÊıÍ£Ö¹Ö´ĞĞ
+	// å¦‚æœå½“å‰å“åº”çŠ¶æ€ç ä¸æ˜¯200ï¼Œè¯´æ˜å‘ç”Ÿäº†é”™è¯¯æˆ–å…¶ä»–æ„å¤–æƒ…å†µï¼Œæ˜¾ç¤ºæç¤ºæ¶ˆæ¯ï¼Œè®©å½“å‰å‡½æ•°åœæ­¢æ‰§è¡Œ
 	if(statusCode != 200) {
-		layer.msg("Ê§°Ü£¡ÏìÓ¦×´Ì¬Âë="+statusCode+" ËµÃ÷ĞÅÏ¢="+ajaxResult.statusText);
+		layer.msg("å¤±è´¥ï¼å“åº”çŠ¶æ€ç ="+statusCode+" è¯´æ˜ä¿¡æ¯="+ajaxResult.statusText);
 		return null;
 	}
 	
-	// Èç¹ûÏìÓ¦×´Ì¬ÂëÊÇ200£¬ËµÃ÷ÇëÇó´¦Àí³É¹¦£¬»ñÈ¡pageInfo
+	// å¦‚æœå“åº”çŠ¶æ€ç æ˜¯200ï¼Œè¯´æ˜è¯·æ±‚å¤„ç†æˆåŠŸï¼Œè·å–pageInfo
 	var resultEntity = ajaxResult.responseJSON;
 	
-	// ´ÓresultEntityÖĞ»ñÈ¡resultÊôĞÔ
+	// ä»resultEntityä¸­è·å–resultå±æ€§
 	var result = resultEntity.result;
 	
-	// ÅĞ¶ÏresultÊÇ·ñ³É¹¦
+	// åˆ¤æ–­resultæ˜¯å¦æˆåŠŸ
 	if(result == "FAILED") {
 		layer.msg(resultEntity.message);
 		return null;
 	}
 	
-	// È·ÈÏresultÎª³É¹¦ºó»ñÈ¡pageInfo
+	// ç¡®è®¤resultä¸ºæˆåŠŸåè·å–pageInfo
 	var pageInfo = resultEntity.data;
 	
-	// ·µ»ØpageInfo
+	// è¿”å›pageInfo
 	return pageInfo;
 }
 
-// Ìî³ä±í¸ñ
+// å¡«å……è¡¨æ ¼
 function fillTableBody(pageInfo) {
 	
-	// Çå³ıtbodyÖĞµÄ¾ÉµÄÄÚÈİ
+	// æ¸…é™¤tbodyä¸­çš„æ—§çš„å†…å®¹
 	$("#rolePageBody").empty();
 	
-	// ÕâÀïÇå¿ÕÊÇÎªÁËÈÃÃ»ÓĞËÑË÷½á¹ûÊ±²»ÏÔÊ¾Ò³Âëµ¼º½Ìõ
+	// è¿™é‡Œæ¸…ç©ºæ˜¯ä¸ºäº†è®©æ²¡æœ‰æœç´¢ç»“æœæ—¶ä¸æ˜¾ç¤ºé¡µç å¯¼èˆªæ¡
 	$("#Pagination").empty();
 	
-	// ÅĞ¶ÏpageInfo¶ÔÏóÊÇ·ñÓĞĞ§
+	// åˆ¤æ–­pageInfoå¯¹è±¡æ˜¯å¦æœ‰æ•ˆ
 	if(pageInfo == null || pageInfo == undefined || pageInfo.list == null || pageInfo.list.length == 0) {
-		$("#rolePageBody").append("<tr><td colspan='4' align='center'>±§Ç¸£¡Ã»ÓĞ²éÑ¯µ½ÄúËÑË÷µÄÊı¾İ£¡</td></tr>");
+		$("#rolePageBody").append("<tr><td colspan='4' align='center'>æŠ±æ­‰ï¼æ²¡æœ‰æŸ¥è¯¢åˆ°æ‚¨æœç´¢çš„æ•°æ®ï¼</td></tr>");
 		
 		return ;
 	}
 	
-	// Ê¹ÓÃpageInfoµÄlistÊôĞÔÌî³ätbody
+	// ä½¿ç”¨pageInfoçš„listå±æ€§å¡«å……tbody
 	for(var i = 0; i < pageInfo.list.length; i++) {
 		
 		var role = pageInfo.list[i];
@@ -203,10 +203,10 @@ function fillTableBody(pageInfo) {
 		
 		var checkBtn = "<button id='"+roleId+"' type='button' class='btn btn-success btn-xs checkBtn'><i class=' glyphicon glyphicon-check'></i></button>";
 		
-		// Í¨¹ıbutton±êÇ©µÄidÊôĞÔ£¨±ğµÄÊôĞÔÆäÊµÒ²¿ÉÒÔ£©°ÑroleIdÖµ´«µİµ½button°´Å¥µÄµ¥»÷ÏìÓ¦º¯ÊıÖĞ£¬ÔÚµ¥»÷ÏìÓ¦º¯ÊıÖĞÊ¹ÓÃthis.id
+		// é€šè¿‡buttonæ ‡ç­¾çš„idå±æ€§ï¼ˆåˆ«çš„å±æ€§å…¶å®ä¹Ÿå¯ä»¥ï¼‰æŠŠroleIdå€¼ä¼ é€’åˆ°buttonæŒ‰é’®çš„å•å‡»å“åº”å‡½æ•°ä¸­ï¼Œåœ¨å•å‡»å“åº”å‡½æ•°ä¸­ä½¿ç”¨this.id
 		var pencilBtn = "<button id='"+roleId+"' type='button' class='btn btn-primary btn-xs pencilBtn'><i class=' glyphicon glyphicon-pencil'></i></button>";
 		
-		// Í¨¹ıbutton±êÇ©µÄidÊôĞÔ£¨±ğµÄÊôĞÔÆäÊµÒ²¿ÉÒÔ£©°ÑroleIdÖµ´«µİµ½button°´Å¥µÄµ¥»÷ÏìÓ¦º¯ÊıÖĞ£¬ÔÚµ¥»÷ÏìÓ¦º¯ÊıÖĞÊ¹ÓÃthis.id
+		// é€šè¿‡buttonæ ‡ç­¾çš„idå±æ€§ï¼ˆåˆ«çš„å±æ€§å…¶å®ä¹Ÿå¯ä»¥ï¼‰æŠŠroleIdå€¼ä¼ é€’åˆ°buttonæŒ‰é’®çš„å•å‡»å“åº”å‡½æ•°ä¸­ï¼Œåœ¨å•å‡»å“åº”å‡½æ•°ä¸­ä½¿ç”¨this.id
 		var removeBtn = "<button id='"+roleId+"' type='button' class='btn btn-danger btn-xs removeBtn'><i class=' glyphicon glyphicon-remove'></i></button>";
 		
 		var buttonTd = "<td>"+checkBtn+" "+pencilBtn+" "+removeBtn+"</td>";
@@ -216,41 +216,41 @@ function fillTableBody(pageInfo) {
 		$("#rolePageBody").append(tr);
 	}
 	
-	// Éú³É·ÖÒ³µ¼º½Ìõ
+	// ç”Ÿæˆåˆ†é¡µå¯¼èˆªæ¡
 	generateNavigator(pageInfo);
 }
 
-// Éú³É·ÖÒ³Ò³Âëµ¼º½Ìõ
+// ç”Ÿæˆåˆ†é¡µé¡µç å¯¼èˆªæ¡
 function generateNavigator(pageInfo) {
 	
-	// »ñÈ¡×Ü¼ÇÂ¼Êı
+	// è·å–æ€»è®°å½•æ•°
 	var totalRecord = pageInfo.total;
 	
-	// ÉùÃ÷Ïà¹ØÊôĞÔ
+	// å£°æ˜ç›¸å…³å±æ€§
 	var properties = {
 		"num_edge_entries": 3,
 		"num_display_entries": 5,
 		"callback": paginationCallBack,
 		"items_per_page": pageInfo.pageSize,
 		"current_page": pageInfo.pageNum - 1,
-		"prev_text": "ÉÏÒ»Ò³",
-		"next_text": "ÏÂÒ»Ò³"
+		"prev_text": "ä¸Šä¸€é¡µ",
+		"next_text": "ä¸‹ä¸€é¡µ"
 	}
 	
-	// µ÷ÓÃpagination()º¯Êı
+	// è°ƒç”¨pagination()å‡½æ•°
 	$("#Pagination").pagination(totalRecord, properties);
 }
 
-// ·­Ò³Ê±µÄ»Øµ÷º¯Êı
+// ç¿»é¡µæ—¶çš„å›è°ƒå‡½æ•°
 function paginationCallBack(pageIndex, jQuery) {
 	
-	// ĞŞ¸Äwindow¶ÔÏóµÄpageNumÊôĞÔ
+	// ä¿®æ”¹windowå¯¹è±¡çš„pageNumå±æ€§
 	window.pageNum = pageIndex + 1;
 	
-	// µ÷ÓÃ·ÖÒ³º¯Êı
+	// è°ƒç”¨åˆ†é¡µå‡½æ•°
 	generatePage();
 	
-	// È¡ÏûÒ³Âë³¬Á´½ÓµÄÄ¬ÈÏĞĞÎª
+	// å–æ¶ˆé¡µç è¶…é“¾æ¥çš„é»˜è®¤è¡Œä¸º
 	return false;
 	
 }

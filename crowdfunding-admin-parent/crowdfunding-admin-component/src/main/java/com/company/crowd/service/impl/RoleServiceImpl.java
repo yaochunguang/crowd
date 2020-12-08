@@ -1,6 +1,7 @@
 package com.company.crowd.service.impl;
 
 import com.company.crowd.constant.CrowdConstant;
+import com.company.crowd.exception.CommonException;
 import com.company.crowd.exception.LoginAcctAlreadyInUseException;
 import com.company.crowd.exception.RoleExistException;
 import com.company.crowd.mapper.RoleMapper;
@@ -9,6 +10,7 @@ import com.company.entity.Role;
 import com.company.entity.RoleExample;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void addRole(Role role) {
+        if (role != null && StringUtils.isEmpty(role.getName())) {
+            throw new CommonException(CrowdConstant.MESSAGE_ROLE_NAME_ISEMPTY);
+        }
         RoleExample roleExample = new RoleExample();
         RoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andNameEqualTo(role.getName());
@@ -58,11 +63,16 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void updateRole(Role role) {
         try {
+            if (role != null && StringUtils.isEmpty(role.getName())) {
+                throw new CommonException(CrowdConstant.MESSAGE_ROLE_NAME_ISEMPTY);
+            }
             roleMapper.updateByPrimaryKeySelective(role);
         } catch (Exception e) {
             logger.info("异常全类名=" + e.getClass().getName());
             if (e instanceof DuplicateKeyException) {
                 throw new RoleExistException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+            } else {
+                throw new CommonException(e.getMessage());
             }
         }
     }

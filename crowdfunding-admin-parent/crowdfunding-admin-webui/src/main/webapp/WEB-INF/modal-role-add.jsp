@@ -12,7 +12,7 @@
 			</div>
 			<div class="modal-body">
 				<form class="form-signin" role="form">
-					<div class="form-group has-success has-feedback">
+					<div class="form-group hsave.jsonas-success has-feedback">
 						<input 
 							type="text" name="roleName"
 							class="form-control" placeholder="请输入角色名称"

@@ -3,13 +3,11 @@ package com.company.crowd.mvc.handler;
 import com.company.crowd.service.api.MenuService;
 import com.company.crowd.util.ResultEntity;
 import com.company.entity.Menu;
-import javafx.scene.control.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +52,12 @@ public class MenuHandler {
     @ResponseBody
     @RequestMapping("/menu/save.json")
     public ResultEntity<Menu> saveMenu(Menu menu) {
-        menuService.saveMenu(menu);
-        return ResultEntity.successWithoutData();
+        try {
+            menuService.saveMenu(menu);
+            return ResultEntity.successWithoutData();
+        } catch (Exception e) {
+            return ResultEntity.failed(e.getMessage());
+        }
     }
 
     /**
@@ -66,8 +68,12 @@ public class MenuHandler {
     @ResponseBody
     @RequestMapping("/menu/update.json")
     public ResultEntity<Menu> updateMenu(Menu menu) {
-        menuService.updateMenu(menu);
-        return ResultEntity.successWithoutData();
+        try {
+            menuService.updateMenu(menu);
+            return ResultEntity.successWithoutData();
+        } catch (Exception e) {
+            return ResultEntity.failed(e.getMessage());
+        }
     }
 
     /**

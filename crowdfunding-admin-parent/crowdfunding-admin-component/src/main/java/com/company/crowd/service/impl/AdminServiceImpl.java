@@ -11,6 +11,7 @@ import com.company.entity.Admin;
 import com.company.entity.AdminExample;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class AdminServiceImpl implements AdminService {
     public void updateAdmin(Admin admin) {
         // “Selective”表示有选择的更新，对于null值的字段不更新
         try {
+            // 非空校验
+            if (admin != null && StringUtils.isEmpty(admin.getLoginAcct())) {
+                throw new LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_LOGINACCT_ISEMPTY);
+            }
             adminMapper.updateByPrimaryKeySelective(admin);
         } catch (Exception e) {
             logger.info("异常全类名=" + e.getClass().getName());
@@ -89,6 +94,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void saveAdmin(Admin admin) {
+        // 非空校验
+        if (admin != null && StringUtils.isEmpty(admin.getLoginAcct())) {
+            throw new LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_LOGINACCT_ISEMPTY);
+        }
         String dateStr = DateUtils.formatDate(new Date(), DateUtils.DATETIME_FORMAT);
         admin.setCreateTime(dateStr);
         // 对密码进行md5加密
