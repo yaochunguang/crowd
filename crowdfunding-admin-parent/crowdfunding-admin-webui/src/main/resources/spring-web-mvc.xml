@@ -33,6 +33,7 @@
         </property>
     </bean>
 
+    <!-- modify 2020-12-19 for 启用了SpringSecurity之后，该拦截器不需要启用，要注释掉 -->
     <!-- 注册拦截器 -->
     <mvc:interceptors>
         <mvc:interceptor>

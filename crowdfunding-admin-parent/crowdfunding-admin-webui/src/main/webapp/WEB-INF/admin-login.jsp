@@ -33,11 +33,13 @@
 
 	<div class="container">
 
+		<%-- SpringSecurity的登录地址为: security/do/login.html --%>
 		<form action="admin/do/login.html" method="post" class="form-signin" role="form">
 			<h2 class="form-signin-heading">
 				<i class="glyphicon glyphicon-log-in"></i> 管理员登录
 			</h2>
 			<p>${requestScope.exception.message }</p>
+			<p>${SPRING_SECURITY_LAST_EXCEPTION.message }</p>
 			<div class="form-group has-success has-feedback">
 				<input type="text" name="loginAcct" value="123" class="form-control" id="loginAcct"
 					placeholder="请输入登录账号" autofocus> <span

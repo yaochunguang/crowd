@@ -24,6 +24,7 @@
 							<li><a href="#"><i class="glyphicon glyphicon-comment"></i>
 									消息</a></li>
 							<li class="divider"></li>
+							<%-- SpringSecurity的退出登录地址为：seucrity/do/logout.html --%>
 							<li><a href="admin/do/logout.html"><i
 									class="glyphicon glyphicon-off"></i> 退出系统</a></li>
 						</ul>
