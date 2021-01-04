@@ -118,3 +118,16 @@ luoyafeng (https://gitee.com/ExamSystem)
 4. tomcat 8 5.通过war包直接放TOMCAT下面 到附件中下载
 
 #### 前台展示：
+
+#### 端口号约定
+| 项目 | 端口号 |
+| -------- | -------- |
+| crowdfunding-member-eureka  | 1000 | 
+| crowdfunding-member-mysql-provider | 2000 | 
+| crowdfunding-member-redis-provider | 3000 | 
+| crowdfunding-member-authentication-consumer | 4000 | 
+| crowdfunding-member-project-consumer | 5000 | 
+| crowdfunding-member-order-consumer | 7000 | 
+| crowdfunding-member-pay-consumer | 8000 | 
+| crowdfunding-member-zuul | 80 | 
+

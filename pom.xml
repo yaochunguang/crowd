@@ -12,6 +12,7 @@
         <module>crowdfunding-admin-parent</module>
         <module>crowdfunding-common-util</module>
         <module>crowdfunding-common-reverse</module>
+        <module>crowdfunding-member-parent</module>
     </modules>
 
     <build>
