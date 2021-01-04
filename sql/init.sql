@@ -80,3 +80,18 @@ INSERT INTO t_auth (id, `name`, title, category_id) VALUES(4, '', '角色模块'
 INSERT INTO t_auth (id, `name`, title, category_id) VALUES(5, 'role:delete', '删除', 4) ;
 INSERT INTO t_auth (id, `name`, title, category_id) VALUES(6, 'role:get', '查询', 4) ;
 INSERT INTO t_auth (id, `name`, title, category_id) VALUES(7, 'role:add', '新增', 4) ;
+
+############ 前台会员系统
+# 系统会员表
+create table t_member (
+id int(11) not null auto_increment,
+loginacct varchar(255) not null comment '会员登录账号',
+userpswd char(200) not null comment '登录密码',
+username varchar(255)comment '用户名',
+email varchar(255) comment '邮箱',
+authstatus int(4) comment '认证状态',
+usertype int(4) comment ' 0 - 个人， 1 - 企业',
+realname varchar(255) comment '实名认证状态 0 - 未实名认证， 1 - 实名认证申 请中， 2 - 已实名认证',
+cardnum varchar(255) comment '会员卡号',
+accttype int(4) comment '0 - 企业， 1 - 个体， 2 - 个人， 3 - 政府',
+primary key (id) );
