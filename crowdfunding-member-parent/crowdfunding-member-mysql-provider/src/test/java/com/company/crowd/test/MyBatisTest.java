@@ -37,7 +37,16 @@ public class MyBatisTest {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String source = "123123";
         String encode = passwordEncoder.encode(source);
-        MemberPO memberPO = new MemberPO(null, "jack", encode, " 杰 克 ", "jack@qq.com", 1, 1, "杰克", "123123", 2);
+        MemberPO memberPO = new MemberPO();
+        memberPO.setLoginacct("jack");
+        memberPO.setUserpswd(encode);
+        memberPO.setUsername("杰克");
+        memberPO.setEmail("jack@qq.com");
+        memberPO.setAuthstatus(1);
+        memberPO.setUsertype(1);
+        memberPO.setRealname("杰克");
+        memberPO.setCardnum("123");
+        memberPO.setAccttype(2);
         memberPOMapper.insert(memberPO);
         logger.debug("插入会员记录成功");
     }
