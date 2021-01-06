@@ -24,6 +24,10 @@
 
     <artifactId>crowdfunding-member-parent</artifactId>
 
+    <properties>
+        <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <!-- 导入 SpringCloud 需要使用的依赖信息 -->
