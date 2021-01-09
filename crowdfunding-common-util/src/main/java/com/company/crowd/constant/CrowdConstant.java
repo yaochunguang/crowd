@@ -16,11 +16,14 @@ public interface CrowdConstant {
     String MESSAGE_LOGINACCT_ISEMPTY = "管理员账号不可为空！";
     String MESSAGE_ROLE_NAME_ISEMPTY = "角色名称不可为空！";
     String MESSAGE_MENU_NAME_ISEMPTY = "菜单名称不可为空！";
+    String MESSAGE_CODE_NOT_EXISTS = "抱歉！验证码不存在！";
+    String MESSAGE_CODE_INVALID = "抱歉！验证码无效！";
     // 保存到redis的手机号的验证码的key的前缀
     String REDIS_CODE_PREFIX = "REDIS_CODE_PREFIX_";
 
     String ATTR_NAME_EXCEPTION = "exception";
     String ATTR_NAME_LOGIN_ADMIN = "loginAdmin";
     String ATTR_NAME_PAGE_INFO = "pageInfo";
+    String ATTR_NAME_MESSAGE = "message";
 
 }

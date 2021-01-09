@@ -1,11 +1,15 @@
 package com.company.crowd.handler;
 
 import com.company.crowd.api.MemberService;
+import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.util.ResultEntity;
 import com.company.entity.po.MemberPO;
+import org.apache.logging.log4j.message.ReusableMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +27,19 @@ public class MemberProviderHandler {
     @Autowired
     private MemberService memberService;
 
+    @RequestMapping("/save/member/remote")
+    public ResultEntity<String> saveMember(@RequestBody MemberPO memberPO) {
+        try {
+            memberService.saveMember(memberPO);
+            return ResultEntity.successWithoutData();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            if (e instanceof DuplicateKeyException) {
+                return ResultEntity.failed(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+            }
+            return ResultEntity.failed(e.getMessage());
+        }
+    }
 
     /**
      * 提供远程调用给consumer

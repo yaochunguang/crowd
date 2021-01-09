@@ -3,6 +3,7 @@ package com.company.crowd.api;
 import com.company.crowd.util.ResultEntity;
 import com.company.entity.po.MemberPO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,6 +15,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient("crowd-mysql")
 public interface MySQLRemoteService {
 
+    /**
+     * 通过登录账号获取用会员信息
+     * @param loginacct
+     * @return
+     */
     @RequestMapping("/get/memberpo/by/login/acct/remote")
     ResultEntity<MemberPO> getMemberPOByLoginAcctRemote(@RequestParam("loginacct") String loginacct);
+
+    /**
+     * 保存会员
+     * @param memberPO
+     */
+    @RequestMapping("/save/member/remote")
+    ResultEntity<String> saveMember(@RequestBody MemberPO memberPO);
 }

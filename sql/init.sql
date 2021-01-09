@@ -95,3 +95,5 @@ realname varchar(255) comment '实名认证状态 0 - 未实名认证， 1 - 实
 cardnum varchar(255) comment '会员卡号',
 accttype int(4) comment '0 - 企业， 1 - 个体， 2 - 个人， 3 - 政府',
 primary key (id) );
+# 用户账号增加唯一索引
+create unique index UK_loginacct on t_member (loginacct);
