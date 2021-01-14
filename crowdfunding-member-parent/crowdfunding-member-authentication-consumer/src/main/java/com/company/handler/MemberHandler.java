@@ -7,6 +7,7 @@ import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.util.CrowdUtil;
 import com.company.crowd.util.ResultEntity;
 import com.company.entity.po.MemberPO;
+import com.company.entity.vo.MemberLoginVO;
 import com.company.entity.vo.MemberVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +37,55 @@ public class MemberHandler {
 
     @Autowired
     private ShortMessageProperties shortMessageProperties;
+
+    /**
+     * 会员退出登录
+     * @param session
+     * @return
+     */
+    @RequestMapping("/auth/member/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    /**
+     * 会员登录
+     * @param loginacct
+     * @param userpswd
+     * @param modelMap
+     * @param session
+     * @return
+     */
+    @RequestMapping("/auth/member/do/login")
+    public String login(@RequestParam("loginacct") String loginacct, @RequestParam("userpswd") String userpswd,
+                        ModelMap modelMap, HttpSession session) {
+        ResultEntity<MemberPO> resultEntity = mySQLRemoteService.getMemberPOByLoginAcctRemote(loginacct);
+        if (ResultEntity.FAILED.equals(resultEntity.getResult())) {
+            // 登录失败
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, resultEntity.getMessage());
+            return "member-login";
+        }
+        MemberPO dbMemberPO = resultEntity.getData();
+        if (dbMemberPO == null) {
+            // 用户名不存在，请先注册
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_MEMBER_NOTEXISTS);
+            return "member-login";
+        }
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        boolean matches = bCryptPasswordEncoder.matches(userpswd, dbMemberPO.getUserpswd());
+        // 不匹配
+        if (!matches) {
+            // 用户名或者密码错误
+            modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_LOGIN_FAILED);
+            return "member-login";
+        }
+        // 将用户信息存到session
+        MemberLoginVO memberLoginVO = new MemberLoginVO(dbMemberPO.getId(), dbMemberPO.getUsername(), dbMemberPO.getEmail());
+        session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER, memberLoginVO);
+        // 登录成功，跳转到首页
+        return "redirect:/auth/member/to/center/page";
+    }
 
     @RequestMapping("/auth/do/member/register")
     public String register(MemberVO memberVO, ModelMap modelMap) {
