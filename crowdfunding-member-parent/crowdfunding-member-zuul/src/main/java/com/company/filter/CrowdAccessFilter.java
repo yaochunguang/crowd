@@ -2,11 +2,14 @@ package com.company.filter;
 
 import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.util.AccessPassResourcesUtil;
+import com.company.entity.vo.MemberLoginVO;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,12 +30,12 @@ public class CrowdAccessFilter extends ZuulFilter {
     @Override
     public String filterType() {
         // 这里返回"pre"意思是目标服务前执行过滤
-        return "pre";
+        return FilterConstants.PRE_TYPE;
     }
 
     @Override
     public int filterOrder() {
-        return 0;
+        return Ordered.HIGHEST_PRECEDENCE + 1;
     }
 
     @Override
@@ -62,14 +65,14 @@ public class CrowdAccessFilter extends ZuulFilter {
         // 获取session
         HttpSession session = request.getSession();
         // 从session中获取已经登录的用户
-        Object loginMember = session.getAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER);
+        MemberLoginVO loginMember = (MemberLoginVO)session.getAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER);
         if (loginMember == null) {
             // currentContext中获取response对象
             HttpServletResponse response = currentContext.getResponse();
             session.setAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_ACCESS_FORBIDEN);
             // 重定向到auth-consumer工程的登录页面
             try {
-                response.sendRedirect("/auth/member/to/login/page");
+                response.sendRedirect("http://www.crowd.com/auth/member/to/login/page");
             } catch (IOException e) {
                 logger.error(e.getMessage());
             }

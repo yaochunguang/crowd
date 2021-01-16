@@ -83,7 +83,7 @@ public class MemberHandler {
         MemberLoginVO memberLoginVO = new MemberLoginVO(dbMemberPO.getId(), dbMemberPO.getUsername(), dbMemberPO.getEmail());
         session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER, memberLoginVO);
         // 登录成功，跳转到首页
-        return "redirect:/auth/member/to/center/page";
+        return "redirect:http://www.crowd.com/auth/member/to/center/page";
     }
 
     @RequestMapping("/auth/do/member/register")
@@ -120,7 +120,7 @@ public class MemberHandler {
             return "member-reg";
         }
         // 使用重定向避免刷新浏览器导致重新执行注册流程
-        return "redirect:/auth/member/to/login/page";
+        return "redirect:http://www.crowd.com/auth/member/to/login/page";
     }
 
     /**
