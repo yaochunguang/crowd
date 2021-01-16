@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
- @AllArgsConstructor
+@AllArgsConstructor
 public class MemberLoginVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

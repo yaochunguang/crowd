@@ -45,6 +45,12 @@
             <artifactId>crowdfunding-common-util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- 引入entity依赖 -->
+        <dependency>
+            <groupId>com.company</groupId>
+            <artifactId>crowdfunding-member-entity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
