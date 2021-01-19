@@ -45,7 +45,7 @@ public class MemberHandler {
     @RequestMapping("/auth/member/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/";
+        return "redirect:http://www.crowd.com/";
     }
 
     /**
