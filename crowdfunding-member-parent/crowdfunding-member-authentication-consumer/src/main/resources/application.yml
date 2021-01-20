@@ -27,3 +27,9 @@ short:
 ribbon:
   ReadTimeOut: 10000
   ConnectionTimeout: 10000
+
+# 配置文件上传地址
+file:
+  upload:
+    path: F://images/
+    relative: /images/**

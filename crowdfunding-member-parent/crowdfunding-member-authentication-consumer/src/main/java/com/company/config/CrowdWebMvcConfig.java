@@ -1,6 +1,8 @@
 package com.company.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -11,6 +13,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  **/
 @Configuration
 public class CrowdWebMvcConfig implements WebMvcConfigurer {
+
+    /**上传地址*/
+    @Value("${file.upload.path}")
+    private String filePath;
+    /**显示相对地址*/
+    @Value("${file.upload.relative}")
+    private String fileRelativePath;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -23,5 +32,11 @@ public class CrowdWebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/auth/member/to/center/page").setViewName("member-center");
         // 前往我的众筹项目
         registry.addViewController("/member/my/crowd").setViewName("member-crowd");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(fileRelativePath).
+                addResourceLocations("file:/" + filePath);
     }
 }
