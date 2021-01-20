@@ -2,8 +2,9 @@ package com.company.crowd.mapper;
 
 import com.company.entity.po.ProjectItemPicPO;
 import com.company.entity.po.ProjectItemPicPOExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ProjectItemPicPOMapper {
     int countByExample(ProjectItemPicPOExample example);
@@ -27,4 +28,6 @@ public interface ProjectItemPicPOMapper {
     int updateByPrimaryKeySelective(ProjectItemPicPO record);
 
     int updateByPrimaryKey(ProjectItemPicPO record);
+
+    int insertPathList(Integer projectId, List<String> detailPicturePathList);
 }
