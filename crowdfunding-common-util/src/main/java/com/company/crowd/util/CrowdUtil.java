@@ -7,8 +7,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,6 +26,32 @@ import java.util.Map;
 public class CrowdUtil {
 
     public static Logger logger = LoggerFactory.getLogger(CrowdUtil.class);
+
+    /**
+     * 上传图片
+     * @param uploadFile 上传的问题件
+     * @param filePath 目标路径
+     * @return
+     */
+    public static ResultEntity<String> uploadImage(MultipartFile uploadFile, String filePath) {
+        // 获取上传的文件名
+        String filename = uploadFile.getOriginalFilename();
+        // 新建文件
+        File targetFile = new File(filePath, filename);
+        // 判断路径是否存在，如果不存在就创建一个
+        if (!targetFile.getParentFile().exists()) {
+            targetFile.getParentFile().mkdirs();
+        }
+        try {
+            // 写入文件
+            uploadFile.transferTo(new File(filePath + File.separator + filename));
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+            return ResultEntity.failed(e.getMessage());
+        }
+        String targetPath = CrowdConstant.UPLOAD_IMAGE_PATH + filename;
+        return ResultEntity.successWithData(targetPath);
+    }
 
     /**
      * 给远程第三方短信接口发送请求把验证码发送到用户手机上

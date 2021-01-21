@@ -1,5 +1,7 @@
 package com.company.crowd.constant;
 
+import java.io.File;
+
 /**
  * @description: 常量类
  * @author: chunguang.yao
@@ -19,7 +21,11 @@ public interface CrowdConstant {
     String MESSAGE_CODE_NOT_EXISTS = "抱歉！验证码不存在！";
     String MESSAGE_CODE_INVALID = "抱歉！验证码无效！";
     String MESSAGE_MEMBER_NOTEXISTS = "该用户不存在，请先注册！";
-
+    String MESSAGE_HEADER_PIC_EMPTY = "项目头图为空，请先上传项目头图！";
+    String MESSAGE_DETAIL_PIC_EMPTY = "项目详情图为空，请先上传项目详情图！";
+    String MESSAGE_HEADER_PIC_UPLOAD_FAILED = "项目头图上传失败！";
+    String MESSAGE_DETAIL_PIC_UPLOAD_FAILED = "项目详情图上传失败！";
+    String MESSAGE_TEMPLE_PROJECT_MISSING = "临时存储的Project对象丢失！！";
 
 
     // 保存到redis的手机号的验证码的key的前缀
@@ -29,5 +35,14 @@ public interface CrowdConstant {
     String ATTR_NAME_LOGIN_ADMIN = "loginAdmin";
     String ATTR_NAME_PAGE_INFO = "pageInfo";
     String ATTR_NAME_MESSAGE = "message";
+    String ATTR_NAME_TEMPLE_PROJECT = "tempProject";
+    /**
+     * 上传图片路径 "/images/photo/"
+     */
+    String UPLOAD_IMAGE_PATH= File.separator + "images" + File.separator + "photo" + File.separator;
+    /**
+     * 图片保存路径
+     */
+    String UPLOAD_IMAGE_SAVE_PATH = "photo" + File.separator;
 
 }

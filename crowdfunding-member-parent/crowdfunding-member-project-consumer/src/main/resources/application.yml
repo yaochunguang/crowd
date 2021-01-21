@@ -23,6 +23,13 @@ eureka:
 #    bucket-name: atguigu190830
 #    end-point: http://oss-cn-shenzhen.aliyuncs.com
 
+# 由于在第一次请求中需要建立缓存、建立连接，操作较多，所以比较耗时。如果按照默认的ribbon超时时间来工作，第一次请求会超过这个时间导致超时报错。
+ # 为了避免这个问题,把 ribbon的超时时间延长。
+ribbon:
+  ReadTimeOut: 10000
+  ConnectionTimeout: 10000
+
+
 # 配置文件上传地址
 file:
   upload:
