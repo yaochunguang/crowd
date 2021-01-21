@@ -28,5 +28,7 @@ public interface ReturnPOMapper {
 
     int updateByPrimaryKey(ReturnPO record);
 
-    int insertReturnPOBatch(List<ReturnPO> returnPOList, Integer projectId);
+    void insertReturnPOBatch(
+            @Param("returnPOList") List<ReturnPO> returnPOList,
+            @Param("projectId") Integer projectId);
 }

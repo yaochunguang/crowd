@@ -64,11 +64,11 @@ public class ProjectServiceImpl implements ProjectService {
         Integer projectPOId = projectPO.getId();
         // 保存项目与分类的关联关系
         List<Integer> typeIdList = projectVO.getTypeIdList();
-        projectPOMapper.insertTypeRelationship(typeIdList);
+        projectPOMapper.insertTypeRelationship(typeIdList, projectPOId);
 
         // 保存项目和标签的关联关系
         List<Integer> tagIdList = projectVO.getTagIdList();
-        projectPOMapper.insertTagRelationship(tagIdList);
+        projectPOMapper.insertTagRelationship(tagIdList, projectPOId);
 
         // 保存项目中的详情图片路径信息
         List<String> detailPicturePathList = projectVO.getDetailPicturePathList();

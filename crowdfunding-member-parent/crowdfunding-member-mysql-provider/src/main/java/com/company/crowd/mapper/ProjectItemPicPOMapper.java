@@ -29,5 +29,7 @@ public interface ProjectItemPicPOMapper {
 
     int updateByPrimaryKey(ProjectItemPicPO record);
 
-    int insertPathList(Integer projectId, List<String> detailPicturePathList);
+    void insertPathList(
+            @Param("projectId") Integer projectId,
+            @Param("detailPicturePathList") List<String> detailPicturePathList);
 }
