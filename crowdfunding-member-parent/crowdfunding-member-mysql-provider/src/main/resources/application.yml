@@ -6,7 +6,7 @@ spring:
   datasource:
     name: mydb
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.56.102:3306/project_crowd?serverTimezone=UTC
+    url: jdbc:mysql://192.168.56.102:3306/project_crowd?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: avamasterA@#
     driver-class-name: com.mysql.cj.jdbc.Driver
