@@ -103,6 +103,25 @@ public class ProjectHandler {
     }
 
     /**
+     * 检查是否已经添加回报信息
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/check/return.json")
+    public ResultEntity<String> checkReturnInfo(HttpSession session) {
+        ProjectVO projectVO = (ProjectVO) session.getAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT);
+        if (projectVO == null) {
+            return ResultEntity.failed(CrowdConstant.MESSAGE_TEMPLE_PROJECT_MISSING);
+        }
+        List<ReturnVO> returnVOList = projectVO.getReturnVOList();
+        if (returnVOList == null || returnVOList.size() == 0) {
+            return ResultEntity.failed("请先添加回报信息！");
+        }
+        return ResultEntity.successWithoutData();
+    }
+
+    /**
      * 保存回报信息
      *
      * @return

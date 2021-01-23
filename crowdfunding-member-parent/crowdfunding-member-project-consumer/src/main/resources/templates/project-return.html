@@ -283,7 +283,7 @@
 																	class="btn btn-primary btn-lg active">上传图片</button>
 																<label class="control-label">支持jpg、jpeg、png、gif格式，大小不超过2M，建议尺寸：760*510px选择文件</label>
 																<br/>
-																<img style="display: none" />
+																<img style="display: none; height: 457px; width: 740px;" />
 															</div>
 														</div>
 														<div class="form-group">
@@ -298,11 +298,11 @@
 															<label for="inputEmail3" class="col-sm-2 control-label">单笔限购</label>
 															<div class="col-sm-10">
 																<label class="radio-inline"> <input type="radio"
-																	name="signalpurchase" id="inlineRadio1"
+																	name="signalpurchase" id="signalpurchase"
 																	value="0"> 不限购
 																</label> <label class="radio-inline"> <input
 																	type="radio" name="signalpurchase"
-																	id="inlineRadio2" value="1"> 限购
+																	id="signalpurchase1" value="1"> 限购
 																</label> <input type="text" name="purchase" value="8" class="form-control"
 																	style="width: 100px; display: inline"> <label
 																	class="radio-inline">默认数量为1，且不超过上方已设置的回报数量</label>
@@ -377,7 +377,8 @@
 							<!--<button type="button" class="btn  btn-default btn-lg"
 								onclick="window.location.href='project-agree.html'">上一步</button>-->
 							<a th:href="@{/project/launch/project/page}" class="btn btn-warning btn-lg">上一步</a>
-							<a th:href="@{/project/create/confirm/page}" class="btn btn-warning btn-lg">下一步</a>
+<!--							<a th:href="@{/project/create/confirm/page}" class="btn btn-warning btn-lg">下一步</a>-->
+							<button type="button" class="btn btn-warning btn-lg" id="nextBtn">下一步</button>
 							<a class="btn"> 预览 </a>
 						</div>
 					</div>
@@ -543,6 +544,27 @@
 					
 					// 将表单部分div隐藏
 					$(".returnFormDiv").hide();
+				}
+			});
+		});
+
+		// 检查是否已经添加汇报信息
+		// 点击确定按钮，绑定单击响应函数
+		$("#nextBtn").click(function(){
+			// 发送Ajax请求
+			$.ajax({
+				"url" : "[[@{/project/check/return.json}]]",
+				"type": "post",
+				"dataType": "json",
+				"success": function(response) {
+					var result = response.result;
+					if(result == "SUCCESS") {
+						window.location.href='http://www.crowd.com/project/create/confirm/page';
+					}
+					if(result == "FAILED") {
+						alert("请先添加回报信息！");
+						return;
+					}
 				}
 			});
 		});
