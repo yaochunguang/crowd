@@ -14,8 +14,8 @@ import java.util.Date;
 public class DateUtils {
 
     public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
     public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DATE_FORMAT_YYYYMMDD = "yyyyMMdd";
 
     /**
      * 按照指定格式进行格式化时间
