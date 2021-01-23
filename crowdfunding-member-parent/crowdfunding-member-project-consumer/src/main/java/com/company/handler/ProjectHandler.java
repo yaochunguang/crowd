@@ -54,15 +54,13 @@ public class ProjectHandler {
     @RequestMapping("/create/project/information")
     public String saveProjectBasicInfo(ProjectVO projectVO, MultipartFile headerPicture, List<MultipartFile> detailPictureList,
                                        HttpSession session, ModelMap modelMap) {
-        // 定义上传文件保存路径
-        String path = filePath + CrowdConstant.UPLOAD_IMAGE_SAVE_PATH;
         boolean headerPictureEmpty = headerPicture.isEmpty();
         if (headerPictureEmpty) {
             modelMap.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_HEADER_PIC_EMPTY);
             return "project-launch";
         }
         // 上传头图
-        ResultEntity<String> uploadImageResultEntity = CrowdUtil.uploadImage(headerPicture, path);
+        ResultEntity<String> uploadImageResultEntity = CrowdUtil.uploadImage(headerPicture, filePath);
         String uploadImageResult = uploadImageResultEntity.getResult();
         // 判断头图上传是否成功
         if (ResultEntity.SUCCESS.equals(uploadImageResult)) {
@@ -86,7 +84,7 @@ public class ProjectHandler {
                 return "project-launch";
             }
             // 执行上传
-            ResultEntity<String> detailUploadResultEntity = CrowdUtil.uploadImage(detailPicture, path);
+            ResultEntity<String> detailUploadResultEntity = CrowdUtil.uploadImage(detailPicture, filePath);
             String detailUploadResult = detailUploadResultEntity.getResult();
             if (ResultEntity.SUCCESS.equals(detailUploadResult)) {
                 detailPicturePathList.add(detailUploadResultEntity.getData());
@@ -158,9 +156,7 @@ public class ProjectHandler {
     @ResponseBody
     @RequestMapping("/create/upload/return/picture.json")
     public ResultEntity<String> uploadReturnPicture(@RequestParam("returnPicture") MultipartFile returnPicture) {
-        // 定义上传文件保存路劲
-        String path = filePath + CrowdConstant.UPLOAD_IMAGE_SAVE_PATH;
-        ResultEntity<String> returnPictureResultEntity = CrowdUtil.uploadImage(returnPicture, path);
+        ResultEntity<String> returnPictureResultEntity = CrowdUtil.uploadImage(returnPicture, filePath);
         return returnPictureResultEntity;
     }
 

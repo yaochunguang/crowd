@@ -58,7 +58,7 @@ public class CrowdUtil {
             logger.error(e.getMessage());
             return ResultEntity.failed(e.getMessage());
         }
-        String targetPath = targetFilePath + targetFileName;
+        String targetPath = targetFilePath + File.separator + targetFileName;
         return ResultEntity.successWithData(targetPath);
     }
 
