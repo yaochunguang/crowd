@@ -83,7 +83,7 @@ public class UploadHandler {
         // 获取上传的文件名
         String filename = file.getOriginalFilename();
         // 定义上传文件保存路劲
-        String path = filePath + "photo/";
+        String path = filePath;
         // 新建文件
         File filepath = new File(path, filename);
         // 判断路径是否存在，如果不存在就创建一个
@@ -97,7 +97,7 @@ public class UploadHandler {
             e.printStackTrace();
         }
         // 将src路径发送至html页面
-        model.addAttribute("filename", "/images/photo/" + filename);
+        model.addAttribute("filename", filePath + File.separator +filename);
         return "uploadPage";
     }
 }

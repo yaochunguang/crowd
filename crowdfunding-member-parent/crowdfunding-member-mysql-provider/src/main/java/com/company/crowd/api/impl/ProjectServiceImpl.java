@@ -13,6 +13,7 @@ import com.company.entity.po.ProjectPO;
 import com.company.entity.po.ReturnPO;
 import com.company.entity.vo.MemberConfirmInfoVO;
 import com.company.entity.vo.MemberLauchInfoVO;
+import com.company.entity.vo.PortalTypeVO;
 import com.company.entity.vo.ProjectVO;
 import com.company.entity.vo.ReturnVO;
 import org.springframework.beans.BeanUtils;
@@ -97,5 +98,10 @@ public class ProjectServiceImpl implements ProjectService {
         BeanUtils.copyProperties(memberConfirmInfoVO, memberConfirmInfoPO);
         memberConfirmInfoPO.setMemberid(memberId);
         memberConfirmInfoPOMapper.insertSelective(memberConfirmInfoPO);
+    }
+
+    @Override
+    public List<PortalTypeVO> selectPortalTypeVOList() {
+        return projectPOMapper.selectPortalTypeVOList();
     }
 }

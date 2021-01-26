@@ -27,7 +27,6 @@ public interface CrowdConstant {
     String MESSAGE_DETAIL_PIC_UPLOAD_FAILED = "项目详情图上传失败！";
     String MESSAGE_TEMPLE_PROJECT_MISSING = "临时存储的Project对象丢失！！";
 
-
     // 保存到redis的手机号的验证码的key的前缀
     String REDIS_CODE_PREFIX = "REDIS_CODE_PREFIX_";
     String ATTR_NAME_LOGIN_MEMBER = "loginMember";
@@ -36,13 +35,5 @@ public interface CrowdConstant {
     String ATTR_NAME_PAGE_INFO = "pageInfo";
     String ATTR_NAME_MESSAGE = "message";
     String ATTR_NAME_TEMPLE_PROJECT = "tempProject";
-    /**
-     * 上传图片路径 "/images/photo/"
-     */
-    String UPLOAD_IMAGE_PATH= File.separator + "images" + File.separator + "photo" + File.separator;
-    /**
-     * 图片保存路径
-     */
-    String UPLOAD_IMAGE_SAVE_PATH = "photo" + File.separator;
-
+    String ATTR_NAME_PORTAL_DATA = "portal_data";
 }

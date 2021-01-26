@@ -3,6 +3,8 @@ package com.company.crowd.mapper;
 import com.company.entity.po.ProjectPO;
 import com.company.entity.po.ProjectPOExample;
 import java.util.List;
+
+import com.company.entity.vo.PortalTypeVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface ProjectPOMapper {
@@ -31,4 +33,10 @@ public interface ProjectPOMapper {
     void insertTypeRelationship(@Param("typeIdList") List<Integer> typeIdList, @Param("projectId") Integer projectId);
 
     void insertTagRelationship(@Param("tagIdList") List<Integer> tagIdList, @Param("projectId") Integer projectId);
+
+    /**
+     * 按照分类查询首页项目信息
+     * @return
+     */
+    List<PortalTypeVO> selectPortalTypeVOList();
 }

@@ -8,7 +8,7 @@ spring:
     suffix: .html
     encoding: utf-8
   redis:
-    host: 192.168.23.130
+    host: 192.168.56.102
   session:
     store-type: redis
 

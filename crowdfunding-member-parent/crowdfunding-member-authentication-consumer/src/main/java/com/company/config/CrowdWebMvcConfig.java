@@ -6,6 +6,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.File;
+
 /**
  * @author: yaochunguang
  * @date: 2021-01-08 10:05
@@ -34,6 +36,10 @@ public class CrowdWebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/member/my/crowd").setViewName("member-crowd");
     }
 
+    /**
+     * 赋值文件读写权限
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(fileRelativePath).

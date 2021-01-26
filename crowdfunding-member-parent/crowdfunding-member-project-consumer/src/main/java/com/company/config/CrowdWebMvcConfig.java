@@ -32,6 +32,10 @@ public class CrowdWebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/show/detail").setViewName("project-detail");
     }
 
+    /**
+     * 赋值文件读写权限
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(fileRelativePath).

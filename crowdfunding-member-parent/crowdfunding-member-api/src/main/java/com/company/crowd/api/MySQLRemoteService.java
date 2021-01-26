@@ -2,11 +2,14 @@ package com.company.crowd.api;
 
 import com.company.crowd.util.ResultEntity;
 import com.company.entity.po.MemberPO;
+import com.company.entity.vo.PortalTypeVO;
 import com.company.entity.vo.ProjectVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author: yaochunguang
@@ -39,4 +42,12 @@ public interface MySQLRemoteService {
      */
     @RequestMapping("/save/project/vo/remote")
     ResultEntity<String> saveProjectVORemote(@RequestBody ProjectVO projectVO, @RequestParam("memberId") Integer memberId);
+
+    /**
+     * 按照分类查询首页项目信息
+     *
+     * @return
+     */
+    @RequestMapping("/get/portal/type/project/data/remote")
+    ResultEntity<List<PortalTypeVO>> getPortalTypeProjectDataRemote();
 }
