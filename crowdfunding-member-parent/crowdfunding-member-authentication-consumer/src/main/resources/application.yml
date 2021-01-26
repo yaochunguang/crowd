@@ -31,5 +31,5 @@ ribbon:
 # 配置文件上传地址
 file:
   upload:
-    path: F:/images/photo
+    path: F:/images/photo/
     relative: /images/**
