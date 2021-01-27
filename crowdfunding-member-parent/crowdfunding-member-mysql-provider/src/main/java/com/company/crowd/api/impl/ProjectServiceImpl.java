@@ -55,7 +55,10 @@ public class ProjectServiceImpl implements ProjectService {
         BeanUtils.copyProperties(projectVO, projectPO);
         projectPO.setMemberid(memberId);
         String dateStr = DateUtils.formatDate(new Date(), DateUtils.DATE_FORMAT);
+        // 创建项目的日期
         projectPO.setCreatedate(dateStr);
+        // 项目发起时间
+        projectPO.setDeploydate(dateStr);
         // status: 0--即将开始
         projectPO.setStatus(0);
         // 为了能够获取到projectPO保存后的自增主键，需要到ProjectPOMapper.xml文件中进行相关设置
