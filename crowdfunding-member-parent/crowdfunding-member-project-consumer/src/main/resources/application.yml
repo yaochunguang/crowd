@@ -30,9 +30,12 @@ ribbon:
   ReadTimeOut: 10000
   ConnectionTimeout: 10000
 
-
-# 配置文件上传地址
+# 说明: diskPath: 文件实际保存路径的根  path: 保存数据库的路径； relative：图片映射路径
+# 因为windows下还有盘符，diskPath比path多一个盘符,如：diskPath: F:/images， path:  /images
+# 但是两者在linux是一致的 如：diskPath:/xxx/xxx/images， path:  /xxx/xxx/images
+# 注意，images后面需要配置斜线 F:/images/
 file:
   upload:
-    path: F:/images/photo/
+    diskPath: F:/images/
+    path:  /images/
     relative: /images/**

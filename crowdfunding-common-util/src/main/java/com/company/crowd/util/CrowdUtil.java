@@ -31,35 +31,38 @@ public class CrowdUtil {
 
     /**
      * 上传图片
-     * @param uploadFile 上传的问题件
-     * @param filePath 目标路径
+     * @param uploadFile 上传的文件
+     * @param filePath 保存到数据库的路径 /image/yyyyMMdd/ + uuid_文件名
+     * @param diskPath 文件存储路径 F:/image/yyyyMMdd/ + uuid_文件名
      * @return
      */
-    public static ResultEntity<String> uploadImage(MultipartFile uploadFile, String filePath) {
-        // 最终的保存路径 /images/photo/yyyyMMdd/
+    public static ResultEntity<String> uploadImage(MultipartFile uploadFile, String filePath, String diskPath) {
+        // 最终的保存路径 diskPath + /yyyyMMdd/ ；如： F:/images/photo/yyyyMMdd/
         String dateStr = DateUtils.formatDate(new Date(), DateUtils.DATE_FORMAT_YYYYMMDD);
-        String targetFilePath = filePath + File.separator + dateStr;
+        // 文件存储路径
+        String targetDiskPath = diskPath + dateStr + File.separator;
         // 获取上传的文件名
-        String fileName = uploadFile.getOriginalFilename();
+        String originalFilename = uploadFile.getOriginalFilename();
         // 把文件的名称设置唯一值，uuid
         String uuid = UUID.randomUUID().toString().replace("-", "");
         // 最终的文件名 uuid_原始文件名
-        String targetFileName = uuid + "_" + fileName;
+        String targetFileName = uuid + "_" + originalFilename;
         // 新建文件
-        File targetFile = new File(targetFilePath, targetFileName);
+        File targetFile = new File(targetDiskPath, targetFileName);
         // 判断路径是否存在，如果不存在就创建一个
         if (!targetFile.getParentFile().exists()) {
             targetFile.getParentFile().mkdirs();
         }
         try {
-            // 写入文件
-            uploadFile.transferTo(new File(targetFilePath + File.separator + targetFileName));
+            // 写入文件到文件存储路径
+            uploadFile.transferTo(new File(targetDiskPath + targetFileName));
         } catch (IOException e) {
             logger.error(e.getMessage());
             return ResultEntity.failed(e.getMessage());
         }
-        String targetPath = targetFilePath + File.separator + targetFileName;
-        return ResultEntity.successWithData(targetPath);
+        // 保存到数据库的路径
+        String dbFilePath = filePath + dateStr + File.separator + targetFileName;
+        return ResultEntity.successWithData(dbFilePath);
     }
 
     /**

@@ -16,10 +16,14 @@ import java.io.File;
 @Configuration
 public class CrowdWebMvcConfig implements WebMvcConfigurer {
 
-    /**上传地址*/
-    @Value("${file.upload.path}")
-    private String filePath;
-    /**显示相对地址*/
+    /**
+     * 文件保存路径
+     */
+    @Value("${file.upload.diskPath}")
+    private String diskPath;
+    /**
+     * 显示相对地址
+     */
     @Value("${file.upload.relative}")
     private String fileRelativePath;
 
@@ -38,11 +42,12 @@ public class CrowdWebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 赋值文件读写权限
+     *
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(fileRelativePath).
-                addResourceLocations("file:/" + filePath);
+                addResourceLocations("file:/" + diskPath);
     }
 }

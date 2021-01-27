@@ -38,6 +38,12 @@ public class ProjectHandler {
     @Value("${file.upload.path}")
     private String filePath;
 
+    /**
+     * 文件存储地址
+     */
+    @Value("${file.upload.diskPath}")
+    private String diskPath;
+
     @Autowired
     private MySQLRemoteService mySQLRemoteService;
 
@@ -60,7 +66,7 @@ public class ProjectHandler {
             return "project-launch";
         }
         // 上传头图
-        ResultEntity<String> uploadImageResultEntity = CrowdUtil.uploadImage(headerPicture, filePath);
+        ResultEntity<String> uploadImageResultEntity = CrowdUtil.uploadImage(headerPicture, filePath, diskPath);
         String uploadImageResult = uploadImageResultEntity.getResult();
         // 判断头图上传是否成功
         if (ResultEntity.SUCCESS.equals(uploadImageResult)) {
@@ -84,7 +90,7 @@ public class ProjectHandler {
                 return "project-launch";
             }
             // 执行上传
-            ResultEntity<String> detailUploadResultEntity = CrowdUtil.uploadImage(detailPicture, filePath);
+            ResultEntity<String> detailUploadResultEntity = CrowdUtil.uploadImage(detailPicture, filePath, diskPath);
             String detailUploadResult = detailUploadResultEntity.getResult();
             if (ResultEntity.SUCCESS.equals(detailUploadResult)) {
                 detailPicturePathList.add(detailUploadResultEntity.getData());
@@ -156,7 +162,7 @@ public class ProjectHandler {
     @ResponseBody
     @RequestMapping("/create/upload/return/picture.json")
     public ResultEntity<String> uploadReturnPicture(@RequestParam("returnPicture") MultipartFile returnPicture) {
-        ResultEntity<String> returnPictureResultEntity = CrowdUtil.uploadImage(returnPicture, filePath);
+        ResultEntity<String> returnPictureResultEntity = CrowdUtil.uploadImage(returnPicture, filePath, diskPath);
         return returnPictureResultEntity;
     }
 

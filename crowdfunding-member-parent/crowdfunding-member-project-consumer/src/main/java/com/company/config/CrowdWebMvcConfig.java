@@ -6,6 +6,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.File;
+
 /**
  * @author: yaochunguang
  * @date: 2021-01-08 10:05
@@ -14,10 +16,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CrowdWebMvcConfig implements WebMvcConfigurer {
 
-    /**上传地址*/
-    @Value("${file.upload.path}")
-    private String filePath;
-    /**显示相对地址*/
+    /**
+     * 文件保存路径
+     */
+    @Value("${file.upload.diskPath}")
+    private String diskPath;
+    /**
+     * 显示相对地址
+     */
     @Value("${file.upload.relative}")
     private String fileRelativePath;
 
@@ -39,6 +45,6 @@ public class CrowdWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(fileRelativePath).
-                addResourceLocations("file:/" + filePath);
+                addResourceLocations("file:/" + diskPath);
     }
 }
