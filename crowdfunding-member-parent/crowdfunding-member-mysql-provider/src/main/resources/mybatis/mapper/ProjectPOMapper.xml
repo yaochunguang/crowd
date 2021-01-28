@@ -41,6 +41,7 @@
     <result column="follower" property="followerCount"/>
     <result column="percentage" property="percentage"/>
     <result column="header_picture_path" property="headerPicturePath"/>
+    <result column="day" property="day"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -423,7 +424,8 @@
         supporter,
         supportmoney/money*100 percentage,
         follower,
-        header_picture_path
+        header_picture_path,
+        day
     FROM
         t_project
     WHERE
