@@ -1,7 +1,9 @@
 package com.company.crowd.api;
 
+import com.company.entity.vo.DetailProjectVO;
 import com.company.entity.vo.PortalTypeVO;
 import com.company.entity.vo.ProjectVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -24,4 +26,11 @@ public interface ProjectService {
      * @return
      */
     List<PortalTypeVO> selectPortalTypeVOList();
+
+    /**
+     * 通过项目id查询项目详细信息
+     * @param projectId
+     * @return
+     */
+    DetailProjectVO getDetailProjectVO(@Param("projectId") Integer projectId);
 }

@@ -48,6 +48,17 @@ public class ProjectHandler {
     private MySQLRemoteService mySQLRemoteService;
 
     /**
+     * 查看项目详情
+     * @param projectId
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("/get/project/detail/{projectId}")
+    public String getProjectDetail(@RequestParam("projectId") Integer projectId, ModelMap modelMap) {
+        return "project-show-detail.html";
+    }
+
+    /**
      * 保存项目基本信息
      *
      * @param projectVO         接收除了上传图片之外的其他普通数据

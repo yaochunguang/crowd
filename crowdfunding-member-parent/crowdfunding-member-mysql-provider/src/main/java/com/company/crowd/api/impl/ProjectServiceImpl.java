@@ -1,6 +1,7 @@
 package com.company.crowd.api.impl;
 
 import com.company.crowd.api.ProjectService;
+import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.mapper.MemberConfirmInfoPOMapper;
 import com.company.crowd.mapper.MemberLaunchInfoPOMapper;
 import com.company.crowd.mapper.ProjectItemPicPOMapper;
@@ -11,6 +12,7 @@ import com.company.entity.po.MemberConfirmInfoPO;
 import com.company.entity.po.MemberLaunchInfoPO;
 import com.company.entity.po.ProjectPO;
 import com.company.entity.po.ReturnPO;
+import com.company.entity.vo.DetailProjectVO;
 import com.company.entity.vo.MemberConfirmInfoVO;
 import com.company.entity.vo.MemberLauchInfoVO;
 import com.company.entity.vo.PortalTypeVO;
@@ -106,5 +108,43 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<PortalTypeVO> selectPortalTypeVOList() {
         return projectPOMapper.selectPortalTypeVOList();
+    }
+
+    @Override
+    public DetailProjectVO getDetailProjectVO(Integer projectId) {
+        DetailProjectVO detailProjectVO = projectPOMapper.getDetailProjectVO(projectId);
+        // 将status转换成对应的statusText
+        int status = detailProjectVO.getStatus();
+        switch (status) {
+            case 0:
+                detailProjectVO.setStatusText(CrowdConstant.STATUS_VERIFYING);
+                break;
+            case 1:
+                detailProjectVO.setStatusText(CrowdConstant.STATUS_CROWDING);
+                break;
+            case 2:
+                detailProjectVO.setStatusText(CrowdConstant.STATUS_CROWD_SUCCESS);
+                break;
+            case 4:
+                detailProjectVO.setStatusText(CrowdConstant.STATUS_CLOSED);
+                break;
+            default:
+                break;
+        }
+        // 根据deployDate计算lastDate
+        String deployDateStr = detailProjectVO.getDeployDate();
+        Date deployDate = DateUtils.convertDateStrToDate(deployDateStr, DateUtils.DATE_FORMAT);
+        // 获取当前时间戳
+        long currentTime = System.currentTimeMillis();
+        // 获取筹集日期的时间戳
+        long deployDateTime = deployDate.getTime();
+        // 两个时间戳相减计算当前已经过去的时间
+        long pastDays = (currentTime - deployDateTime) / 1000 / 60 / 60 / 24;
+        // 获取总的众筹天数 TODO: 数据库还没有返回这个
+        Integer totalDays = detailProjectVO.getDay();
+        // 使用总的众筹天数减去已经过去的天数得到剩余天数
+        Integer lastDay = (int) (totalDays - pastDays);
+        detailProjectVO.setLastDay(lastDay);
+        return detailProjectVO;
     }
 }

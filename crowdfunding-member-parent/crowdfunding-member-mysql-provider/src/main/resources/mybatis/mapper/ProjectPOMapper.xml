@@ -30,6 +30,18 @@
                 ofType="com.company.entity.vo.PortalProjectVO"
                 select="com.company.crowd.mapper.ProjectPOMapper.selectPortalProjectVOList"></collection>
   </resultMap>
+  <resultMap id="loadProjectDetailResultMap" type="com.company.entity.vo.DetailProjectVO">
+    <id column="id" property="projectId"/>
+    <result column="project_name" property="projectName"/>
+    <result column="project_description" property="projectDesc"/>
+    <result column="money" property="money"/>
+    <result column="status" property="status"/>
+    <result column="deploydate" property="deployDate"/>
+    <result column="supportmoney" property="supportMoney"/>
+    <result column="follower" property="followerCount"/>
+    <result column="percentage" property="percentage"/>
+    <result column="header_picture_path" property="headerPicturePath"/>
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -396,5 +408,25 @@
       WHERE
       t_project_type.typeid =
       #{id} ORDER BY t_project.id DESC LIMIT 0,4
+  </select>
+
+  <!-- 通过项目id查询项目详细信息 -->
+  <select id="getDetailProjectVO" resultMap="loadProjectDetailResultMap">
+      SELECT
+        id,
+        project_name,
+        project_description,
+        money,
+        status,
+        deploydate,
+        supportmoney,
+        supporter,
+        supportmoney/money*100 percentage,
+        follower,
+        header_picture_path
+    FROM
+        t_project
+    WHERE
+        id = #{projectId}
   </select>
 </mapper>

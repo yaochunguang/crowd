@@ -4,6 +4,7 @@ import com.company.entity.po.ProjectPO;
 import com.company.entity.po.ProjectPOExample;
 import java.util.List;
 
+import com.company.entity.vo.DetailProjectVO;
 import com.company.entity.vo.PortalTypeVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -39,4 +40,11 @@ public interface ProjectPOMapper {
      * @return
      */
     List<PortalTypeVO> selectPortalTypeVOList();
+
+    /**
+     * 通过项目id查询项目详细信息
+     * @param projectId
+     * @return
+     */
+    DetailProjectVO getDetailProjectVO(@Param("projectId") Integer projectId);
 }

@@ -36,4 +36,10 @@ public interface CrowdConstant {
     String ATTR_NAME_MESSAGE = "message";
     String ATTR_NAME_TEMPLE_PROJECT = "tempProject";
     String ATTR_NAME_PORTAL_DATA = "portal_data";
+
+    /* 项目状态 */
+    String STATUS_VERIFYING = "审核中";
+    String STATUS_CROWDING = "众筹中";
+    String STATUS_CROWD_SUCCESS = "众筹成功";
+    String STATUS_CLOSED = "已关闭";
 }

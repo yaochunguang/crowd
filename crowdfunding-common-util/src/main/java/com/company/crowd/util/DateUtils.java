@@ -3,6 +3,7 @@ package com.company.crowd.util;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,5 +30,23 @@ public class DateUtils {
         }
         DateFormat dateFormat = new SimpleDateFormat(format);
         return dateFormat.format(date);
+    }
+
+    /**
+     * 将日期字符串转换成对应的日期，转换失败返回null
+     * @param dateStr
+     * @param format
+     * @return
+     */
+    public static Date convertDateStrToDate(String dateStr, String format) {
+        if (StringUtils.isEmpty(format)) {
+            format = DATETIME_FORMAT;
+        }
+        DateFormat dateFormat = new SimpleDateFormat(format);
+        try {
+            return dateFormat.parse(dateStr);
+        } catch (ParseException e) {
+           return null;
+        }
     }
 }
