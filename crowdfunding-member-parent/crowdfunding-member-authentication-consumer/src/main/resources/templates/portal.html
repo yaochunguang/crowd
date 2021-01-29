@@ -353,7 +353,7 @@ h3.break>a {
 										<div th:each="project : ${type.portalProjectVOList}" class="col-md-3">
 											<div class="thumbnail">
 												<!-- thymeleaf中的onclick写法参考帖子： https://www.cnblogs.com/passedbylove/p/12162536.html -->
-												<img alt="300x200" th:onclick="|getDetailProjectInfo(${project.projectId});|" th:src="@{${project.headerPicturePath}}" src="img/product-1.jpg" />
+												<img alt="300x200" th:onclick="|getDetailProjectInfo(${project.projectId})|" th:src="@{${project.headerPicturePath}}" src="img/product-1.jpg" />
 												<div class="caption">
 													<h3 class="break">
 														<a th:href="'http://www.crowd.com/project/get/project/detail/'+${project.projectId}" href="project.html" th:text="${project.projectName}">活性富氢净水直饮机</a>
@@ -406,7 +406,7 @@ h3.break>a {
 								rel="nofollow" href="http://www.atguigu.com">网站地图</a> | <a
 								rel="nofollow" href="http://www.atguigu.com">联系我们</a>
 						</div>
-						<div class="copyRight">Copyright ?2017-2017atguigu.com 版权所有
+						<div class="copyRight">Copyright ?2017-2017crowd.com 版权所有
 						</div>
 					</div>
 
@@ -423,13 +423,10 @@ h3.break>a {
 	<script src="script/docs.min.js"></script>
 	<script src="script/back-to-top.js"></script>
 	<script>
-		// $(".thumbnail img").css("cursor", "pointer");
-		// 查看项目详情信息
+		$(".thumbnail img").css("cursor", "pointer");
 		function getDetailProjectInfo(projectId) {
-			alert(projectId);
-			// window.location.href = "http://www.crowd.com/project/get/project/detail/" + projectId;
+			window.location.href = "http://www.crowd.com/project/get/project/detail/" + projectId;
 		}
-
 	/*	$(function () {
 			var loginMember =  '[[${session.loginMember}]]';
 			debugger;

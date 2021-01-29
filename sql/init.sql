@@ -103,6 +103,13 @@ create table t_type ( id int(11) not null auto_increment,
 name varchar(255) comment '分类名称',
 remark varchar(255) comment '分类介绍',
 primary key (id) );
+# 基础数据
+INSERT INTO t_type (name,remark) VALUES
+('科技','科技创造未来')
+,('设计','创意改变世界')
+,('农业','网络天下肥美')
+,('其他','发现更多惊喜')
+;
 
 # 项目分类中间表
 create table t_project_type ( id int not null auto_increment,
