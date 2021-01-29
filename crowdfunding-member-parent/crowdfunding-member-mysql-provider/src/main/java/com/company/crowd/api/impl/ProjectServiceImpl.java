@@ -134,17 +134,21 @@ public class ProjectServiceImpl implements ProjectService {
         // 根据deployDate计算lastDate
         String deployDateStr = detailProjectVO.getDeployDate();
         Date deployDate = DateUtils.convertDateStrToDate(deployDateStr, DateUtils.DATE_FORMAT);
-        // 获取当前时间戳
-        long currentTime = System.currentTimeMillis();
-        // 获取筹集日期的时间戳
-        long deployDateTime = deployDate.getTime();
-        // 两个时间戳相减计算当前已经过去的时间
-        long pastDays = (currentTime - deployDateTime) / 1000 / 60 / 60 / 24;
-        // 获取总的众筹天数
-        Integer totalDays = detailProjectVO.getDay();
-        // 使用总的众筹天数减去已经过去的天数得到剩余天数
-        Integer lastDay = (int) (totalDays - pastDays);
-        detailProjectVO.setLastDay(lastDay);
+        if (deployDate != null) {
+            // 获取当前时间戳
+            long currentTime = System.currentTimeMillis();
+            // 获取筹集日期的时间戳
+            long deployDateTime = deployDate.getTime();
+            // 两个时间戳相减计算当前已经过去的时间
+            long pastDays = (currentTime - deployDateTime) / 1000 / 60 / 60 / 24;
+            // 获取总的众筹天数
+            Integer totalDays = detailProjectVO.getDay();
+            // 使用总的众筹天数减去已经过去的天数得到剩余天数
+            Integer lastDay = (int) (totalDays - pastDays);
+            detailProjectVO.setLastDay(lastDay);
+        } else {
+            detailProjectVO.setLastDay(0);
+        }
         return detailProjectVO;
     }
 }

@@ -2,11 +2,13 @@ package com.company.crowd.handler;
 
 import com.company.crowd.api.ProjectService;
 import com.company.crowd.util.ResultEntity;
+import com.company.entity.vo.DetailProjectVO;
 import com.company.entity.vo.PortalTypeVO;
 import com.company.entity.vo.ProjectVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,6 +58,23 @@ public class ProjectProviderHandler {
             List<PortalTypeVO> portalTypeVOList = projectService.selectPortalTypeVOList();
             return ResultEntity.successWithData(portalTypeVOList);
         } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResultEntity.failed(e.getMessage());
+        }
+    }
+
+    /**
+     * 通过项目id查询项目详细信息
+     * @param projectId
+     * @return
+     */
+    @RequestMapping("/get/project/detail/remote/{projectId}")
+    public ResultEntity<DetailProjectVO> getDetailProjectVORemote(@PathVariable("projectId")Integer projectId) {
+        try {
+            DetailProjectVO detailProjectVO = projectService.getDetailProjectVO(projectId);
+            return ResultEntity.successWithData(detailProjectVO);
+        } catch (Exception e) {
+            e.printStackTrace();
             logger.error(e.getMessage());
             return ResultEntity.failed(e.getMessage());
         }

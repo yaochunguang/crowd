@@ -42,6 +42,12 @@
     <result column="percentage" property="percentage"/>
     <result column="header_picture_path" property="headerPicturePath"/>
     <result column="day" property="day"/>
+    <collection property="detailPicturePathList"
+                select="com.company.crowd.mapper.ProjectPOMapper.selectDetailPicturePath"
+                column="id" />
+    <collection property="detailReturnVOList"
+                select="com.company.crowd.mapper.ProjectPOMapper.selectDetailReturnVO"
+                column="id" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -430,5 +436,25 @@
         t_project
     WHERE
         id = #{projectId}
+  </select>
+
+  <!-- 获取项目详情图片 -->
+  <select id="selectDetailPicturePath" resultType="java.lang.String">
+    select item_pic_path from t_project_item_pic where projectId=#{id}
+  </select>
+  <!-- 获取项目汇报信息 -->
+  <select id="selectDetailReturnVO" resultType="com.company.entity.vo.DetailReturnVO">
+    select
+      id returnId,
+      supportmoney supportMoney,
+      content,
+      signalpurchase signalPurchase,
+      purchase,
+      freight,
+      returndate returnDate
+      from
+      t_return
+      where
+      projectid = #{id}
   </select>
 </mapper>

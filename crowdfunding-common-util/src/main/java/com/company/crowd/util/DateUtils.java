@@ -45,7 +45,7 @@ public class DateUtils {
         DateFormat dateFormat = new SimpleDateFormat(format);
         try {
             return dateFormat.parse(dateStr);
-        } catch (ParseException e) {
+        } catch (Exception e) {
            return null;
         }
     }

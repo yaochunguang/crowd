@@ -4,6 +4,7 @@ import com.company.crowd.api.MySQLRemoteService;
 import com.company.crowd.constant.CrowdConstant;
 import com.company.crowd.util.CrowdUtil;
 import com.company.crowd.util.ResultEntity;
+import com.company.entity.vo.DetailProjectVO;
 import com.company.entity.vo.MemberConfirmInfoVO;
 import com.company.entity.vo.MemberLoginVO;
 import com.company.entity.vo.ProjectVO;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +56,11 @@ public class ProjectHandler {
      * @return
      */
     @RequestMapping("/get/project/detail/{projectId}")
-    public String getProjectDetail(@RequestParam("projectId") Integer projectId, ModelMap modelMap) {
+    public String getProjectDetail(@PathVariable("projectId") Integer projectId, ModelMap modelMap) {
+        ResultEntity<DetailProjectVO> resultEntity = mySQLRemoteService.getDetailProjectVORemote(projectId);
+        if (ResultEntity.SUCCESS.equals(resultEntity.getResult())) {
+            modelMap.addAttribute("detailProjectVO", resultEntity.getData());
+        }
         return "project-show-detail.html";
     }
 
