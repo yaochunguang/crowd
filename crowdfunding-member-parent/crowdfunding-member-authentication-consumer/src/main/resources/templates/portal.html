@@ -212,35 +212,38 @@ h3.break>a {
 					<div class="navbar-header">
 						<a class="navbar-brand" href="http://www.crowd.com" style="font-size: 32px;">Crowd-创意产品众筹平台</a>
 					</div>
-					<div id="navbar" class="navbar-collapse collapse"
-						style="float: right;">
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="login.html"
-								th:href="@{/auth/member/to/login/page}">登录</a></li>
-							<li><a href="reg.html" th:href="@{/auth/member/to/reg/page}">注册</a></li>
-							<li><a>|</a></li>
-							<li><a href="http://localhost:8080/admin/to/login/page.html" target="_blank">管理员入口</a></li>
-						</ul>
+					<div th:if="${#strings.isEmpty(session.loginMember)}">
+						<div id="navbar" class="navbar-collapse collapse"
+							style="float: right;">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="login.html"
+									th:href="@{/auth/member/to/login/page}">登录</a></li>
+								<li><a href="reg.html" th:href="@{/auth/member/to/reg/page}">注册</a></li>
+								<li><a>|</a></li>
+								<li><a href="http://localhost:8080/admin/to/login/page.html" target="_blank">管理员入口</a></li>
+							</ul>
+						</div>
 					</div>
-
-					<!--<div id="navbarLogin" class="navbar-collapse collapse" style="float:right;">
-						<ul class="nav navbar-nav">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-										class="glyphicon glyphicon-user"></i><span
-										class="caret" id="userNameSpan"></span></a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="member.html"><i class="glyphicon glyphicon-scale"></i> 会员中心</a></li>
-									<li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
-									<li class="divider"></li>
-									<li><a href="index.html" th:href="@{/auth/member/logout}"><i
-											class="glyphicon glyphicon-off"></i> 退出系统</a></li>
-								</ul>
-							</li>
-							<li><a>|</a></li>
-							<li><a href="http://localhost:8080/admin/to/login/page.html" target="_blank">管理员入口</a></li>
-						</ul>
-					</div>-->
+					<div th:if="${not #strings.isEmpty(session.loginMember)}">
+						<div id="navbar1" class="navbar-collapse collapse" style="float:right;">
+							<ul class="nav navbar-nav">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+											class="glyphicon glyphicon-user"></i> [[${session.loginMember.username}]]<span
+											class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="member.html"><i class="glyphicon glyphicon-scale"></i> 会员中心</a></li>
+										<li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
+										<li class="divider"></li>
+										<li><a href="index.html" th:href="@{/auth/member/logout}"><i
+												class="glyphicon glyphicon-off"></i> 退出系统</a></li>
+									</ul>
+								</li>
+								<li><a>|</a></li>
+								<li><a href="http://localhost:8080/admin/to/login/page.html" target="_blank">管理员入口</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</nav>
 
@@ -427,20 +430,6 @@ h3.break>a {
 		function getDetailProjectInfo(projectId) {
 			window.location.href = "http://www.crowd.com/project/get/project/detail/" + projectId;
 		}
-	/*	$(function () {
-			var loginMember =  '[[${session.loginMember}]]';
-			debugger;
-			if (loginMember == "" || loginMember == null || loginMember == undefined) {
-				// 未登录
-				$("#navbar").attr("style","display:block;");
-				$("navbarLogin").attr("style", "display:none;");
-			} else {
-				// 已登录
-				var userName= '[[${session.loginMember.username}]]';
-				$("#userNameSpan").val(userName);
-				$("#navbarLogin").attr("style","display:block;");
-			}
-		});*/
 	</script>
 </body>
 </html>
