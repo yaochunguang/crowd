@@ -36,6 +36,6 @@ ribbon:
 # 注意，images后面需要配置斜线 F:/images/
 file:
   upload:
-    diskPath: F:/images/
+    diskPath: /images/
     path:  /images/
     relative: /images/**

@@ -16,8 +16,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <start-class>com.company.ProjectApplication</start-class>
     </properties>
 
     <dependencies>
@@ -68,8 +67,26 @@
             <artifactId>spring-boot-loader</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
+            <!-- 这个插件将 SpringBoot 应用打包成一个可执行的 jar 包 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>${start-class}</mainClass>
+                </configuration>
+            </plugin>
+            <!-- 指定jdk版本 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
