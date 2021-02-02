@@ -10,15 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>crowdfunding-member-eureka</artifactId>
-
     <name>crowdfunding-member-eureka</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
         <start-class>com.company.EurekaApplication</start-class>
     </properties>
 
@@ -30,6 +25,8 @@
     </dependencies>
 
     <build>
+        <!--指定打成的jar包名称-->
+        <finalName>CrowdEureka</finalName>
         <plugins>
             <!-- 这个插件将 SpringBoot 应用打包成一个可执行的 jar 包 -->
             <plugin>
@@ -44,8 +41,75 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <!--打包时指定主类-->
                     <mainClass>${start-class}</mainClass>
+                    <!--打包时去除第三方依赖-->
+                    <layout>ZIP</layout>
+                    <includes>
+                        <include>
+                            <groupId>non-exists</groupId>
+                            <artifactId>non-exists</artifactId>
+                        </include>
+                    </includes>
                 </configuration>
+            </plugin>
+            <!--拷贝第三方依赖文件到指定目录-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!--target/lib是依赖jar包的输出目录，根据自己喜好配置-->
+                            <outputDirectory>target/lib</outputDirectory>
+                            <excludeTransitive>false</excludeTransitive>
+                            <stripVersion>false</stripVersion>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--拷贝资源文件 copy-resources-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                </resource>
+                            </resources>
+                            <outputDirectory>target/config</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <!--copy 脚本，把bin目录下的文件复制到，打包目录下-->
+                    <execution>
+                        <id>copy-bin</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>bin/</directory>
+                                </resource>
+                            </resources>
+                            <outputDirectory>target/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <!-- 指定jdk版本 -->
             <plugin>
