@@ -134,8 +134,48 @@
                                     <directory>src/main/resources</directory>
                                 </resource>
                             </resources>
-                            <outputDirectory>target/config</outputDirectory>
+                            <outputDirectory>target/resources</outputDirectory>
                         </configuration>
+                    </execution>
+                    <!--copy 脚本，把bin目录下的文件复制到，打包目录下-->
+                    <execution>
+                        <id>copy-bin</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>bin/</directory>
+                                </resource>
+                            </resources>
+                            <outputDirectory>target/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 将项目最终打包成.tar.gz文件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <!-- 描述文件路径 -->
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
+                    <outputDirectory>target/dist/</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!--名字任意 -->
+                        <id>make-assembly</id>
+                        <!-- 绑定到package生命周期阶段上 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 只运行一次 -->
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

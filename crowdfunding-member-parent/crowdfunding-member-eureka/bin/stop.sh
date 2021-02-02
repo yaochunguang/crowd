@@ -6,4 +6,5 @@ echo CrowdEureka is already stopped
 else
 echo kill $PID
 kill $PID
+echo CrowdEureka stoped!
 fi

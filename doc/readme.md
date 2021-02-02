@@ -117,17 +117,31 @@ luoyafeng (https://gitee.com/ExamSystem)
 3. jdk 1.8
 4. tomcat 8 5.通过war包直接放TOMCAT下面 到附件中下载
 
-#### 前台展示：
+#### 前台会员系统：
 
 #### 端口号约定
 | 项目 | 端口号 |
 | -------- | -------- |
-| crowdfunding-member-eureka  | 1000 | 
-| crowdfunding-member-mysql-provider | 2000 | 
-| crowdfunding-member-redis-provider | 3000 | 
-| crowdfunding-member-authentication-consumer | 4000 | 
-| crowdfunding-member-project-consumer | 5000 | 
-| crowdfunding-member-order-consumer | 7000 | 
-| crowdfunding-member-pay-consumer | 8000 | 
-| crowdfunding-member-zuul | 80 | 
+| crowdfunding-member-eureka  | 1000 |
+| crowdfunding-member-mysql-provider | 2000 |
+| crowdfunding-member-redis-provider | 3000 |
+| crowdfunding-member-authentication-consumer | 4000 |
+| crowdfunding-member-project-consumer | 5000 |
+| crowdfunding-member-order-consumer | 7000 |
+| crowdfunding-member-pay-consumer | 8000 |
+| crowdfunding-member-zuul | 80 |
+
+#### 前台会员系统打包部署
+
+> 在编译器的maven插件中执行clean->install生成部署文件；或者到项目pom文件所以目录执行mvn clean,install 来生成部署文件
+
+![image-20210202161657962](readme.assets/image-20210202161657962.png)
+
+> 会在target目录下的dist目录下生成一个xxx.tar.gz的部署包
+
+![image-20210202161835058](readme.assets/image-20210202161835058.png)
+
+>  把该部署文件上传到liunx服务器的部署目录;解压，执行start.sh即可启动项目
+
+![image-20210202163507646](readme.assets/image-20210202163507646.png)
 
