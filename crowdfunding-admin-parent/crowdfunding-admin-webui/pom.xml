@@ -13,8 +13,6 @@
     <packaging>war</packaging>
 
     <name>crowdfunding-admin-webui Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -64,9 +62,16 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
     <build>
+        <finalName>crowdadmin</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warName>crowdadmin</warName>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
